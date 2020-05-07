@@ -24,6 +24,16 @@ class MoviesTest extends TestCase
         
         $this->get('/v1/movies')->assertSee($attributes['name']);
     }
+    
+    /** @test */
+    public function a_user_can_view_a_movie(){
+        $movie = factory('App\Models\Movie')->create();
+        $this->get($movie->path())
+            ->assertSee($movie->name)
+            //->assertSee($movie->published_at);
+            ->assertSee($movie->status) 
+            ->assertSee($movie->image);
+    }
 
     /** @test */
     
