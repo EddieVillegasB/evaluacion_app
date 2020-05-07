@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () { 
     Route::apiResources([
-        'movies' => 'API\MovieController'
+        'movies' => 'API\MovieController',
+        'turns' => 'API\TurnController'
     ]);
 });
 

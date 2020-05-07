@@ -11,4 +11,8 @@ class Movie extends Model {
     public function path(){
         return "/v1/movies/{$this->id}";
     }
+
+    public function turns(){
+        return $this->hasMany('App\Models\Turn');
+    }
 }

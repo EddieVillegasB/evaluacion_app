@@ -62,7 +62,28 @@ class MoviesTest extends TestCase
         $attributes = factory('App\Models\Movie')->raw(['image' => '']);
 
         $this->post('/v1/movies',$attributes)->assertSessionHasErrors('image');
+
+    }
+
+    /** @test */
+    public function a_user_can_update_a_movie() {
+        
+        $movie = factory('App\Models\Movie')->create();
+        
+        $attributes = factory('App\Models\Movie')->raw(['status' => true]);
+        
+        $this->put($movie->path(), $attributes);
+        
+        $this->assertEquals($movie, $attributes);
     
     }
 
+    /** @test */
+    public function a_user_can_delete_a_movie(){
+        
+        $movie = factory('App\Models\Movie')->create();
+        
+        $this->delete($movie->path())->assertSee($movie->id);
+    
+    }
 }

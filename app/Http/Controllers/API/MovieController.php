@@ -47,9 +47,9 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
-    {
-        //
+    public function update(Request $request, Movie $movie){
+        $movie->update($request->all());
+        return response()->json(['movie' => $movie, 'message' => 'OK', 'error' => false], 200);
     }
 
     /**
@@ -58,8 +58,8 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
-    {
-        //
+    public function destroy(Movie $movie){
+        $movie->delete();
+        return response()->json(['movie' => $movie, 'message' => 'OK', 'error' => false], 200);
     }
 }
