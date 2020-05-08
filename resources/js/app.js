@@ -6,6 +6,13 @@ const router = new VueRouter({
     routes,
     mode:'history'
 })
+Vue.mixin({
+    filters:{
+        isActive(value){
+            return value ? 'Activo' : 'Inactivo'
+        }
+    }
+})
 require('./bootstrap');
 window.Vue = require('vue');
 Vue.component('App', require('./components/App').default);

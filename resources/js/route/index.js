@@ -1,11 +1,15 @@
 import movies from '../components/movies/index'
-import create from '../components/movies/store'
+import movie from '../components/movies/store'
 import turns from '../components/turns/index'
+import turn from '../components/turns/create'
 
 const routes = [
+    { path: '/turns', component: turns, name:'turns.index'},
+    { path: '/turns/:id', component: turn, name:'turns.show'},
     { path: '/movies', component: movies, name:'movies.index'},
-    { path: '/movies/create', component: create, name:'movies.store'},
-    { path: '/turns', component: turns, name:'turns'}
+    { path: '/movies/:id', component: movie, name:'movies.show'},
+    { path: '/movies/create', component: movie, name:'movies.store'},
+    { path: '/turns/create', component: turn, name:'turns.store'}
 ]
 
 export default routes

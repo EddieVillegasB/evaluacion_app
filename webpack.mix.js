@@ -4,4 +4,5 @@ mix
 .sass('resources/sass/app.scss', 'public/css')
 .postCss('resources/css/main.css', 'public/css', [
     require('tailwindcss'),
-]);
+])
+.copyDirectory('resources/icos', 'public/icons');;
