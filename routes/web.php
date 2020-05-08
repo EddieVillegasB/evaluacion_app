@@ -9,9 +9,9 @@ Route::prefix('v1')->group(function () {
     ]);
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
