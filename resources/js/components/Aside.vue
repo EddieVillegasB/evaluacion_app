@@ -14,7 +14,7 @@
     export default {
         data: () => ({links:[
             {text:'Dashboard', name:'dashboard'}, 
-            {tex:'Peliculas', name:'movies'}, 
+            {tex:'Peliculas', name:'movies.index'}, 
             {text:'Turnos', name:'turns'}, 
             {text:'Administradores', name:'admin'},
             {text:'Perfil', name:'profil'},  

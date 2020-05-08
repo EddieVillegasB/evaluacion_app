@@ -18,7 +18,7 @@ class CreateMoviesTable extends Migration
             $table->string('name');
             $table->boolean('status')->default(false);
             $table->timestamp('published_at');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
