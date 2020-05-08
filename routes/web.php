@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 Route::prefix('v1')->group(function () { 
     Route::apiResources([
         'movies' => 'API\MovieController',
@@ -9,9 +10,6 @@ Route::prefix('v1')->group(function () {
     ]);
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::view('/{any}', 'welcome')->where('any', '.*');
 
 Auth::routes();
