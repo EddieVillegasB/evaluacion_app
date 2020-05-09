@@ -16,10 +16,10 @@
             return{
                 required:true,
                 routes:{
-                    'turns.show':{title:'Turnos', link:'turns.store', action:'Nuevo turno'},
-                    'turns.index':{title:'Turnos', link:'turns.show', action:'Nuevo turno'},
-                    'movies.index':{title:'Peliculas', link:'movies.show',action:'Nueva pelicula'},
-                    'movies.show':{title:'Peliculas', link:'movies.show',action:'Nueva pelicula'},
+                    'turn':{title:'Turnos', link:'turn', action:'Nuevo turno'},
+                    'turns':{title:'Turnos', link:'turn', action:'Nuevo turno'},
+                    'movies':{title:'Peliculas', link:'movie',action:'Nueva pelicula'},
+                    'movie':{title:'Peliculas', link:'movie',action:'Nueva pelicula'},
                 }
             }
         },

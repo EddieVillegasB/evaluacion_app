@@ -2,12 +2,12 @@
     <nav class="bg-blue-900 w-1/6 h-screen">
         <ul class="text-center">
             <li class="border border-black p-2">
-                <router-link :to="{name:'movies.index'}">
+                <router-link :to="{name:'movies'}">
                     {{'Peliculas'}}
                 </router-link>
             </li>
             <li class="border border-black p-2">
-                <router-link :to="{name:'turns.index'}">
+                <router-link :to="{name:'turns'}">
                     {{'Turnos'}}
                 </router-link>
             </li>

@@ -1,7 +1,7 @@
 <template>
     <ul class="flex justify-around">
         <li>
-            <router-link :to="{path:this.item.path}">
+            <router-link :to="{path:this.item.fullPath}">
                 <img src="../../icons/edit-pencil.svg" class="w-4 cursor-pointer"/>
             </router-link>
         </li>
@@ -42,7 +42,7 @@
         methods:{
             async remove(e){
                 e.preventDefault()
-                const URL = `v1/${this.item.path}`
+                const URL = `v1/${this.item.fullPath}`
                 try {
                     this.$store.dispatch(this.action, {id:this.item.id});
                     await axios.delete(URL)

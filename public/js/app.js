@@ -1911,6 +1911,130 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Action.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Action.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    item: {
+      type: Object,
+      require: true
+    }
+  },
+  methods: {
+    saveOrUpdate: function saveOrUpdate() {
+      if (this.action) this.update();else this.save();
+    },
+    save: function save() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+
+                if (_this.item.isComplete()) {
+                  _context.next = 3;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 3:
+                _context.next = 5;
+                return axios.post(_this.ite.path, _this.item);
+
+              case 5:
+                _this.$router.push({
+                  name: _this.item.path
+                });
+
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
+    },
+    update: function update() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.put("/v1/".concat(_this2.item.fullPath), _this2.item);
+
+              case 3:
+                _this2.$router.push({
+                  name: _this2.item.path
+                });
+
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 6]]);
+      }))();
+    }
+  },
+  computed: {
+    action: function action() {
+      return this.$route.params.id ? true : false;
+    }
+  },
+  filters: {
+    method: function method(value) {
+      return value ? 'Actualizar' : 'Guardar';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Actions.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Actions.vue?vue&type=script&lang=js& ***!
@@ -1979,7 +2103,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 e.preventDefault();
-                URL = "v1/".concat(_this.item.path);
+                URL = "v1/".concat(_this.item.fullPath);
                 _context.prev = 2;
 
                 _this.$store.dispatch(_this.action, {
@@ -2137,24 +2261,24 @@ __webpack_require__.r(__webpack_exports__);
     return {
       required: true,
       routes: {
-        'turns.show': {
+        'turn': {
           title: 'Turnos',
-          link: 'turns.store',
+          link: 'turn',
           action: 'Nuevo turno'
         },
-        'turns.index': {
+        'turns': {
           title: 'Turnos',
-          link: 'turns.show',
+          link: 'turn',
           action: 'Nuevo turno'
         },
-        'movies.index': {
+        'movies': {
           title: 'Peliculas',
-          link: 'movies.show',
+          link: 'movie',
           action: 'Nueva pelicula'
         },
-        'movies.show': {
+        'movie': {
           title: 'Peliculas',
-          link: 'movies.show',
+          link: 'movie',
           action: 'Nueva pelicula'
         }
       }
@@ -2352,6 +2476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models_movie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/movie */ "./resources/js/models/movie.js");
+/* harmony import */ var _components_Action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Action */ "./resources/js/components/Action.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2383,7 +2508,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'movies.create',
@@ -2392,50 +2517,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       movie: {}
     };
   },
-  computed: {
-    action: function action() {
-      return this.$route.params.id ? true : false;
-    }
-  },
-  filters: {
-    method: function method(value) {
-      return value ? 'Actualizar' : 'Guardar';
-    }
+  components: {
+    Action: _components_Action__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
-    saveOrUpdate: function saveOrUpdate() {
-      if (this.action) this.update();else this.save();
-    },
-    save: function save() {
-      var _this = this;
-
+    get: function get(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var URL;
+        var URL, _yield$axios$get, data;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                URL = '/v1/movies';
+                URL = "/v1/movies/".concat(id);
                 _context.prev = 1;
-
-                if (_this.movie.isComplete()) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return");
+                _context.next = 4;
+                return axios.get(URL);
 
               case 4:
-                _context.next = 6;
-                return axios.post(URL, _this.movie);
-
-              case 6:
-                _this.$router.push({
-                  name: 'movies.index'
-                });
-
-                _context.next = 12;
-                break;
+                _yield$axios$get = _context.sent;
+                data = _yield$axios$get.data;
+                return _context.abrupt("return", data);
 
               case 9:
                 _context.prev = 9;
@@ -2449,121 +2551,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[1, 9]]);
       }))();
-    },
-    update: function update() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var URL;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                URL = "/v1/movies/".concat(_this2.movie.id);
-                _context2.prev = 1;
-                _context2.next = 4;
-                return axios.put(URL, _this2.movie);
-
-              case 4:
-                _this2.$router.push({
-                  name: 'movies.index'
-                });
-
-                _context2.next = 10;
-                break;
-
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](1);
-                console.log(_context2.t0);
-
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[1, 7]]);
-      }))();
-    },
-    get: function get(id) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var URL, _yield$axios$get, data;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                URL = "/v1/movies/".concat(id);
-                _context3.prev = 1;
-                _context3.next = 4;
-                return axios.get(URL);
-
-              case 4:
-                _yield$axios$get = _context3.sent;
-                data = _yield$axios$get.data;
-                return _context3.abrupt("return", data);
-
-              case 9:
-                _context3.prev = 9;
-                _context3.t0 = _context3["catch"](1);
-                console.log(_context3.t0);
-
-              case 12:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[1, 9]]);
-      }))();
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      var id, _yield$_this3$get, _yield$_this3$get$mov, movie;
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var id, _yield$_this$get, _yield$_this$get$movi, movie;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              id = _this3.$route.params.id;
-              _context4.prev = 1;
+              id = _this.$route.params.id;
+              _context2.prev = 1;
 
               if (!id) {
-                _context4.next = 11;
+                _context2.next = 11;
                 break;
               }
 
-              _context4.next = 5;
-              return _this3.get(id);
+              _context2.next = 5;
+              return _this.get(id);
 
             case 5:
-              _yield$_this3$get = _context4.sent;
-              _yield$_this3$get$mov = _yield$_this3$get.movie;
-              movie = _yield$_this3$get$mov === void 0 ? {} : _yield$_this3$get$mov;
-              _this3.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create(movie);
-              _context4.next = 12;
+              _yield$_this$get = _context2.sent;
+              _yield$_this$get$movi = _yield$_this$get.movie;
+              movie = _yield$_this$get$movi === void 0 ? {} : _yield$_this$get$movi;
+              _this.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create(movie);
+              _context2.next = 12;
               break;
 
             case 11:
-              _this3.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create();
+              _this.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create();
 
             case 12:
-              _context4.next = 17;
+              _context2.next = 17;
               break;
 
             case 14:
-              _context4.prev = 14;
-              _context4.t0 = _context4["catch"](1);
-              console.log(_context4.t0);
+              _context2.prev = 14;
+              _context2.t0 = _context2["catch"](1);
+              console.log(_context2.t0);
 
             case 17:
             case "end":
-              return _context4.stop();
+              return _context2.stop();
           }
         }
-      }, _callee4, null, [[1, 14]]);
+      }, _callee2, null, [[1, 14]]);
     }))();
   }
 });
@@ -2582,6 +2618,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models_Turn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/Turn */ "./resources/js/models/Turn.js");
+/* harmony import */ var _components_Action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Action */ "./resources/js/components/Action.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2600,8 +2637,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'turns.store',
@@ -2610,50 +2646,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       turn: {}
     };
   },
-  computed: {
-    action: function action() {
-      return this.$route.params.id ? true : false;
-    }
-  },
-  filters: {
-    method: function method(value) {
-      return value ? 'Actualizar' : 'Guardar';
-    }
-  },
   methods: {
-    saveOrUpdate: function saveOrUpdate() {
-      if (this.action) this.update();else this.save();
-    },
-    save: function save() {
-      var _this = this;
-
+    get: function get(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var URL;
+        var URL, _yield$axios$get, data;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                URL = '/v1/turns';
+                URL = "/v1/turs/".concat(id);
                 _context.prev = 1;
-
-                if (_this.turn.isComplete()) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return");
+                _context.next = 4;
+                return axios.get(URL);
 
               case 4:
-                _context.next = 6;
-                return axios.post(URL, _this.turn);
-
-              case 6:
-                _this.$router.push({
-                  name: 'turns.index'
-                });
-
-                _context.next = 12;
-                break;
+                _yield$axios$get = _context.sent;
+                data = _yield$axios$get.data;
+                return _context.abrupt("return", data);
 
               case 9:
                 _context.prev = 9;
@@ -2667,110 +2677,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[1, 9]]);
       }))();
-    },
-    update: function update() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var URL;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                URL = "/v1/turns/".concat(_this2.turn.id);
-                _context2.prev = 1;
-                _context2.next = 4;
-                return axios.put(URL, _this2.turn);
-
-              case 4:
-                _this2.$router.push({
-                  name: 'turns.index'
-                });
-
-                _context2.next = 10;
-                break;
-
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](1);
-                console.log(_context2.t0);
-
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[1, 7]]);
-      }))();
-    },
-    get: function get(id) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var URL, _yield$axios$get, data;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                URL = "/v1/turns/".concat(id);
-                _context3.prev = 1;
-                _context3.next = 4;
-                return axios.get(URL);
-
-              case 4:
-                _yield$axios$get = _context3.sent;
-                data = _yield$axios$get.data;
-                return _context3.abrupt("return", data);
-
-              case 9:
-                _context3.prev = 9;
-                _context3.t0 = _context3["catch"](1);
-                console.log(_context3.t0);
-
-              case 12:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[1, 9]]);
-      }))();
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      var id, _yield$_this3$get, turn;
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var id, _yield$_this$get, turn;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              id = _this3.$route.params.id;
+              id = _this.$route.params.id;
 
               if (!id) {
-                _context4.next = 9;
+                _context2.next = 9;
                 break;
               }
 
-              _context4.next = 4;
-              return _this3.get(id);
+              _context2.next = 4;
+              return _this.get(id);
 
             case 4:
-              _yield$_this3$get = _context4.sent;
-              turn = _yield$_this3$get.turn;
-              _this3.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create(turn);
-              _context4.next = 10;
+              _yield$_this$get = _context2.sent;
+              turn = _yield$_this$get.turn;
+              _this.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create(turn);
+              _context2.next = 10;
               break;
 
             case 9:
-              _this3.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create();
+              _this.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create();
 
             case 10:
             case "end":
-              return _context4.stop();
+              return _context2.stop();
           }
         }
-      }, _callee4);
+      }, _callee2);
     }))();
   }
 });
@@ -60105,6 +60049,38 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Action.vue?vue&type=template&id=2e3dbd3e&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Action.vue?vue&type=template&id=2e3dbd3e& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "bg-green-800 p-2",
+      attrs: { type: "button" },
+      on: { click: _vm.saveOrUpdate }
+    },
+    [_vm._v("\n     " + _vm._s(_vm._f("method")(_vm.action)) + "\n ")]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Actions.vue?vue&type=template&id=36eeabe2&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Actions.vue?vue&type=template&id=36eeabe2& ***!
@@ -60124,7 +60100,7 @@ var render = function() {
     _c(
       "li",
       [
-        _c("router-link", { attrs: { to: { path: this.item.path } } }, [
+        _c("router-link", { attrs: { to: { path: this.item.fullPath } } }, [
           _c("img", {
             staticClass: "w-4 cursor-pointer",
             attrs: { src: __webpack_require__(/*! ../../icons/edit-pencil.svg */ "./resources/icons/edit-pencil.svg") }
@@ -60248,7 +60224,7 @@ var render = function() {
         "li",
         { staticClass: "border border-black p-2" },
         [
-          _c("router-link", { attrs: { to: { name: "movies.index" } } }, [
+          _c("router-link", { attrs: { to: { name: "movies" } } }, [
             _vm._v(
               "\n                " + _vm._s("Peliculas") + "\n            "
             )
@@ -60261,7 +60237,7 @@ var render = function() {
         "li",
         { staticClass: "border border-black p-2" },
         [
-          _c("router-link", { attrs: { to: { name: "turns.index" } } }, [
+          _c("router-link", { attrs: { to: { name: "turns" } } }, [
             _vm._v("\n                " + _vm._s("Turnos") + "\n            ")
           ])
         ],
@@ -60457,74 +60433,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", [
-    _c("div", { staticClass: "w-full m-2" }, [
-      _c("label", [_vm._v(_vm._s("Nombres"))]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.movie.name,
-            expression: "movie.name"
-          }
-        ],
-        staticClass: "w-3/4",
-        domProps: { value: _vm.movie.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+  return _c(
+    "form",
+    [
+      _c("div", { staticClass: "w-full m-2" }, [
+        _c("label", [_vm._v(_vm._s("Nombres"))]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.movie.name,
+              expression: "movie.name"
             }
-            _vm.$set(_vm.movie, "name", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "w-full m-2" }, [
-      _c("label", [_vm._v(_vm._s("F. publicacion"))]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.movie.published_at,
-            expression: "movie.published_at"
-          }
-        ],
-        staticClass: "w-3/4",
-        attrs: { type: "date" },
-        domProps: { value: _vm.movie.published_at },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          ],
+          staticClass: "w-3/4",
+          domProps: { value: _vm.movie.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.movie, "name", $event.target.value)
             }
-            _vm.$set(_vm.movie, "published_at", $event.target.value)
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "w-full m-2" }, [
-      _c("label", [_vm._v(_vm._s("imagen"))]),
+        })
+      ]),
       _vm._v(" "),
-      _c("input", { staticClass: "w-3/4", attrs: { type: "file" } })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "bg-green-800 p-2",
-        attrs: { type: "button" },
-        on: { click: _vm.saveOrUpdate }
-      },
-      [_vm._v("\n        " + _vm._s(_vm._f("method")(_vm.action)) + "\n    ")]
-    )
-  ])
+      _c("div", { staticClass: "w-full m-2" }, [
+        _c("label", [_vm._v(_vm._s("F. publicacion"))]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.movie.published_at,
+              expression: "movie.published_at"
+            }
+          ],
+          staticClass: "w-3/4",
+          attrs: { type: "date" },
+          domProps: { value: _vm.movie.published_at },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.movie, "published_at", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-full m-2" }, [
+        _c("label", [_vm._v(_vm._s("imagen"))]),
+        _vm._v(" "),
+        _c("input", { staticClass: "w-3/4", attrs: { type: "file" } })
+      ]),
+      _vm._v(" "),
+      _c("Action", { attrs: { item: _vm.movie } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60548,82 +60520,78 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", [
-    _c("label", [_vm._v(_vm._s("Turno"))]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.turn.time,
-          expression: "turn.time"
-        }
-      ],
-      attrs: { type: "time" },
-      domProps: { value: _vm.turn.time },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _c(
+    "form",
+    [
+      _c("label", [_vm._v(_vm._s("Turno"))]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.turn.time,
+            expression: "turn.time"
           }
-          _vm.$set(_vm.turn, "time", $event.target.value)
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("label", [_vm._v(_vm._s("Activo"))]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.turn.status,
-          expression: "turn.status"
-        }
-      ],
-      attrs: { type: "checkbox" },
-      domProps: {
-        checked: Array.isArray(_vm.turn.status)
-          ? _vm._i(_vm.turn.status, null) > -1
-          : _vm.turn.status
-      },
-      on: {
-        change: function($event) {
-          var $$a = _vm.turn.status,
-            $$el = $event.target,
-            $$c = $$el.checked ? true : false
-          if (Array.isArray($$a)) {
-            var $$v = null,
-              $$i = _vm._i($$a, $$v)
-            if ($$el.checked) {
-              $$i < 0 && _vm.$set(_vm.turn, "status", $$a.concat([$$v]))
-            } else {
-              $$i > -1 &&
-                _vm.$set(
-                  _vm.turn,
-                  "status",
-                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                )
+        ],
+        attrs: { type: "time" },
+        domProps: { value: _vm.turn.time },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
             }
-          } else {
-            _vm.$set(_vm.turn, "status", $$c)
+            _vm.$set(_vm.turn, "time", $event.target.value)
           }
         }
-      }
-    }),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "bg-green-800 p-2",
-        attrs: { type: "button" },
-        on: { click: _vm.saveOrUpdate }
-      },
-      [_vm._v("\n        " + _vm._s(_vm._f("method")(_vm.action)) + "\n    ")]
-    )
-  ])
+      }),
+      _vm._v(" "),
+      _c("label", [_vm._v(_vm._s("Activo"))]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.turn.status,
+            expression: "turn.status"
+          }
+        ],
+        attrs: { type: "checkbox" },
+        domProps: {
+          checked: Array.isArray(_vm.turn.status)
+            ? _vm._i(_vm.turn.status, null) > -1
+            : _vm.turn.status
+        },
+        on: {
+          change: function($event) {
+            var $$a = _vm.turn.status,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false
+            if (Array.isArray($$a)) {
+              var $$v = null,
+                $$i = _vm._i($$a, $$v)
+              if ($$el.checked) {
+                $$i < 0 && _vm.$set(_vm.turn, "status", $$a.concat([$$v]))
+              } else {
+                $$i > -1 &&
+                  _vm.$set(
+                    _vm.turn,
+                    "status",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
+              }
+            } else {
+              _vm.$set(_vm.turn, "status", $$c)
+            }
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("Action", { attrs: { item: _vm.turn } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -77032,6 +77000,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/Action.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Action.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Action_vue_vue_type_template_id_2e3dbd3e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Action.vue?vue&type=template&id=2e3dbd3e& */ "./resources/js/components/Action.vue?vue&type=template&id=2e3dbd3e&");
+/* harmony import */ var _Action_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Action.vue?vue&type=script&lang=js& */ "./resources/js/components/Action.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Action_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Action_vue_vue_type_template_id_2e3dbd3e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Action_vue_vue_type_template_id_2e3dbd3e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Action.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Action.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Action.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Action_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Action.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Action.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Action_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Action.vue?vue&type=template&id=2e3dbd3e&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Action.vue?vue&type=template&id=2e3dbd3e& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Action_vue_vue_type_template_id_2e3dbd3e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Action.vue?vue&type=template&id=2e3dbd3e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Action.vue?vue&type=template&id=2e3dbd3e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Action_vue_vue_type_template_id_2e3dbd3e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Action_vue_vue_type_template_id_2e3dbd3e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Actions.vue":
 /*!*********************************************!*\
   !*** ./resources/js/components/Actions.vue ***!
@@ -77750,8 +77787,9 @@ var Turn = /*#__PURE__*/function () {
 
     this.id = id;
     this.time = time;
+    this.path = 'turns';
     this.status = status;
-    this.path = "turns/".concat(this.id);
+    this.fullPath = "".concat(this.path, "/").concat(this.id);
   }
 
   _createClass(Turn, [{
@@ -77811,8 +77849,9 @@ var Movie = /*#__PURE__*/function () {
     this.id = id;
     this.name = name;
     this.image = image;
+    this.path = 'movies';
     this.status = status;
-    this.path = "movies/".concat(this.id);
+    this.fullPath = "".concat(this.path, "/").concat(this.id);
     this.published_at = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD');
   }
 
@@ -77856,19 +77895,19 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/turns',
   component: _components_turns_index__WEBPACK_IMPORTED_MODULE_2__["default"],
-  name: 'turns.index'
+  name: 'turns'
 }, {
   path: '/turns/:id',
   component: _components_turns_create__WEBPACK_IMPORTED_MODULE_3__["default"],
-  name: 'turns.show'
+  name: 'turn'
 }, {
   path: '/movies',
   component: _components_movies_index__WEBPACK_IMPORTED_MODULE_0__["default"],
-  name: 'movies.index'
+  name: 'movies'
 }, {
   path: '/movies/:id',
   component: _components_movies_store__WEBPACK_IMPORTED_MODULE_1__["default"],
-  name: 'movies.show'
+  name: 'movie'
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 

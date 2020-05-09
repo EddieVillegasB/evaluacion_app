@@ -3,8 +3,9 @@ class Turn {
     constructor({id = '', time = '', status = false}){
         this.id = id
         this.time = time
+        this.path = 'turns'
         this.status = status
-        this.path = `turns/${this.id}`
+        this.fullPath = `${this.path}/${this.id}`
     }
 
     isComplete(){

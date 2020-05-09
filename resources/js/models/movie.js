@@ -5,8 +5,9 @@ class Movie {
         this.id = id
         this.name = name
         this.image = image
+        this.path = 'movies'
         this.status = status
-        this.path = `movies/${this.id}`
+        this.fullPath = `${this.path}/${this.id}`
         this.published_at = moment().format('YYYY-MM-DD')
     }
 

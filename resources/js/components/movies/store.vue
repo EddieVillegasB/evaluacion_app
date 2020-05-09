@@ -1,6 +1,7 @@
 <template>
   
   <form>
+
       <div class="w-full m-2">
         <label>{{'Nombres'}}</label>
         <input class="w-3/4" v-model="movie.name"/>
@@ -16,9 +17,7 @@
         <input type="file" class='w-3/4'/>
       </div>
 
-      <button @click="saveOrUpdate" type="button" class="bg-green-800 p-2">
-          {{action | method}}
-      </button>
+      <Action :item="movie"/>
 
   </form>
 
@@ -26,78 +25,46 @@
 
 <script>
 
-    import Movie from '../../models/movie'
+  import Movie from '../../models/movie'
+  import Action from '../../components/Action'
 
-    export default {
-        
-        name:'movies.create',
+  export default {
+      
+    name:'movies.create',
 
-        data : () =>({movie:{}}),
+    data : () =>({movie:{}}),
 
-        computed:{
-            action(){
-                return this.$route.params.id ? true : false
-            }
-        },
+    components:{
+      Action
+    },
 
-        filters:{
-            method(value){
-                return value ? 'Actualizar' : 'Guardar'
-            }
-        },
-
-        methods:{
-            saveOrUpdate(){
-                if(this.action)
-                    this.update()
-                else
-                    this.save() 
-            },
-            async save(){
-                const URL = '/v1/movies'
-                try {
-                    if(!this.movie.isComplete()) return
-                    await axios.post(URL, this.movie)
-                    this.$router.push({name:'movies.index'})
-                } catch (error) {
-                    console.log(error)
-                }
-            },
-            async update(){
-                const URL = `/v1/movies/${this.movie.id}`
-                try {
-                    await axios.put(URL, this.movie)
-                    this.$router.push({name:'movies.index'})
-                } catch (error) {
-                    console.log(error)
-                }
-            },
-            async get(id){
-                const URL = `/v1/movies/${id}`
-                try {
-                    const {data} = await axios.get(URL)
-                    return data
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-        },
-
-        async created(){
-            const {params:{id}} = this.$route
-            try {
-                if(id){
-                    const {movie = {}} = await this.get(id)
-                    this.movie = Movie.create(movie)
-                }else {
-                    this.movie = Movie.create()
-                }
-            } catch (error) {
-                console.log(error)
-            }
+    methods:{
+      async get(id){
+        const URL = `/v1/movies/${id}`
+        try {
+            const {data} = await axios.get(URL)
+            return data
+        } catch (error) {
+            console.log(error)
         }
+      }
+    },
 
+    async created(){
+      const {params:{id}} = this.$route
+      try {
+          if(id){
+              const {movie = {}} = await this.get(id)
+              this.movie = Movie.create(movie)
+          }else {
+              this.movie = Movie.create()
+          }
+      } catch (error) {
+          console.log(error)
+      }
     }
+
+  }
 </script>
 
 <style>
