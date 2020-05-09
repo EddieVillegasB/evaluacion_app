@@ -1,7 +1,7 @@
 const store = {
     namespaced: true,
     state:{
-        movies:[],
+        movies:{},
         movie:{}
     },
     actions:{
@@ -9,17 +9,20 @@ const store = {
             commit('SET_MOVIES', payload)
         },
         DELETE_MOVIE({commit, state}, payload){
-            const movies = state.movies.filter(movie => movie.id !== payload.id)
-            commit('SET_MOVIES', {movies})
+            const movies = state.movies.data.filter(movie => movie.id !== payload.id)
+            commit('SET_DATA_MOVIES', movies)
         }
     },
     mutations:{
         SET_MOVIES(state, payload){
             state.movies = payload.movies
+        },
+        SET_DATA_MOVIES(state, data){
+            state.movies.data = data
         }
     },
     getters:{
-        movies : (state) => state.movies 
+        movies : (state) => state.movies
     }
 }
 

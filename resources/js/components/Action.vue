@@ -6,14 +6,12 @@
 
 <script>
   export default {
-
     props:{
         item:{
             type: Object,
             require: true
         }
     },
-
     methods:{
       saveOrUpdate(){
         if(this.action)
@@ -22,9 +20,12 @@
             this.save() 
       },
       async save(){
+        if(!this.item.isComplete()) return
+        const formData = new FormData()
+        for(let property in this.item)
+          formData.append(property, this.item[property])
         try {
-            if(!this.item.isComplete()) return
-            await axios.post(`/v1/${this.item.path}`, this.item)
+            await axios.post(`/v1/${this.item.path}`, formData)
             this.$router.push({name:this.item.path})
         } catch (error) {
             console.log(error)

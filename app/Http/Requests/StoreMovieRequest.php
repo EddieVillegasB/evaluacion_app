@@ -25,7 +25,7 @@ class StoreMovieRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'status' => 'sometimes|boolean',
+            //'status' => 'sometimes|boolean',
             'published_at' => 'required|date',
             'image' => 'sometimes:required'
         ];

@@ -1,21 +1,29 @@
 <template>
   
-  <form>
+    <form class="flex flex-wrap">
 
-      <div class="w-full m-2">
-        <label>{{'Nombres'}}</label>
-        <input class="w-3/4" v-model="movie.name"/>
+      <div class="flex w-full mb-8">
+        <div class="w-2/12">
+          <label>{{'Nombres'}}</label>
+        </div>
+        <div class="w-10/12">
+          <input class="w-full" v-model="movie.name"/>
+        </div>
       </div>
 
-      <div class="w-full m-2">
+      <div class="w-full mb-8">
         <label>{{'F. publicacion'}}</label>
         <input class="w-3/4" type="date" v-model="movie.published_at"/>
       </div>
 
-      <div class="w-full m-2">
+      <div class="w-full mb-8">
         <label>{{'imagen'}}</label>
-        <input type="file" class='w-3/4'/>
+        <a href="#" @click="load_image">
+          <img :src="movie.image" class="w-32"/>
+        </a>
+        <input type="file" class='w-3/4 hidden' @click="setImage" ref="imagen"/>
       </div>
+
 
       <Action :item="movie"/>
 
@@ -30,7 +38,7 @@
 
   export default {
       
-    //name:'movie',
+    name:'movie',
 
     data : () =>({movie:{}}),
 
@@ -39,6 +47,13 @@
     },
 
     methods:{
+      load_image(){
+        this.$refs.imagen.click()
+      },
+      setImage(e){
+        const [image] = e.target.files
+        this.movie.image = image
+      },
       async get(id){
         try {
             const {data} = await axios.get(`/v1/movies/${id}`)

@@ -16,7 +16,7 @@ class CreateMoviesTable extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamp('published_at');
             $table->string('image')->nullable();
             $table->timestamps();

@@ -9,13 +9,16 @@ const store = {
             commit('SET_TURNS', payload)
         },
         DELETE_TURN({commit, state}, payload){
-            const turns = state.turns.filter(({id}) => id !== payload.id)
-            commit('SET_TURNS', {turns})
+            const turns = state.turns.data.filter(({id}) => id !== payload.id)
+            commit('SET_DATA_TURNS', turns)
         }
     },
     mutations:{
         SET_TURNS(state, payload){
             state.turns = payload.turns
+        },
+        SET_DATA_TURNS(state, data){
+            state.turns.data = data
         }
     },
     getters:{

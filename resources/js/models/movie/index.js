@@ -1,7 +1,7 @@
 import moment from 'moment'
 class Movie {
 
-    constructor({id = '', name = '', published_at = '', image = '', status = false}){
+    constructor({id = '', name = '', published_at = '', image = '', status = true}){
         this.id = id
         this.name = name
         this.image = image
@@ -12,11 +12,23 @@ class Movie {
     }
 
     isComplete(){
-        return !!this.name && !!this.published_at
+        const isComplete = !!this.name && !!this.published_at
+        if(!isComplete)
+            alert('existen algunos campos vacios')
+        return isComplete
     }
 
     static create(data = {}){
         return new Movie(data)
+    }
+
+    getData(){
+        return {
+            name: this.name,
+            image: this.image,
+            status:this.status,
+            published_at: this.published_at
+        }
     }
 
 }

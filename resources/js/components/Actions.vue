@@ -41,7 +41,6 @@
         },
         methods:{
             async remove(e){
-                e.preventDefault()
                 const URL = `v1/${this.item.fullPath}`
                 try {
                     this.$store.dispatch(this.action, {id:this.item.id});

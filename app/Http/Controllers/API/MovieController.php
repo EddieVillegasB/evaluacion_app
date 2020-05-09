@@ -26,8 +26,23 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreMovieRequest $request) {
-        $movie = Movie::create($request->validated());
+
+        $data = $request->validated();
+
+        if($request->hasFile('image')){
+            
+            if($request->file('image')->isValid()){
+                $image = $request->file('image');
+                $name =  $image->getClientOriginalName();
+                $path =  $image->storeAs('public/images', $name);
+                $data['image'] = "/storage/images/{$name}"; 
+            }
+        }
+
+        $movie = Movie::create($data);
+        
         return response()->json(['movie' => $movie, 'message' => 'OK', 'error' => false], 201);
+    
     }
 
     /**

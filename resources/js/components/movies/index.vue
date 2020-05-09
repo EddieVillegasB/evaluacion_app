@@ -1,7 +1,7 @@
 <template>
   <section class="border border-black">
-    <List :columns="columns">
-      <tr v-for="(movie, index) in movies" :key="index">
+    <List :columns="columns" v-if="movies.isEmpty">
+      <tr v-for="(movie, index) in movies.data" :key="index">
       <td>{{movie.id}}</td>  
       <td>{{movie.name}}</td>  
       <td>{{movie.published_at | format_date}}</td>  
@@ -9,15 +9,18 @@
       <td><Actions :item="movie" :action="'movies/DELETE_MOVIE'"/></td>
       </tr>
     </List>
+    <Empty :message="'No hay peliculas'" v-else/>
   </section>
 </template>
 
 <script>
   import axios from 'axios'
   import List from '../List'
+  import Empty from '../Empty'
   import moment from 'moment'
   import Actions from '../Actions'
   import Movie from '../../models/movie/index'
+  import Collection from '../../models/Collection'
   
   export default {
 
@@ -29,13 +32,13 @@
       format_date : (value) => moment(value).format('MM-DD-YYYY')
     },
     
-    components:{List, Actions},
+    components:{List, Actions, Empty},
     
     methods:{
       async getMovies(){
         try {
           const {data:{movies}} = await axios.get('/v1/movies')
-          this.$store.dispatch('movies/SET_MOVIES', {movies:movies.map(Movie.create)})
+          this.$store.dispatch('movies/SET_MOVIES', {movies:Collection.create(movies,Movie)})
         } catch (error) {
           console.log(error)
         }
