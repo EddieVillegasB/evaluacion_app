@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import routes from './route'
 import VueRouter from 'vue-router'
 import movies from './store/modules/movies/index'
+import turns from './store/modules/turns/index'
 Vue.use(VueRouter)
 Vue.use(Vuex)
 const router = new VueRouter({
@@ -11,7 +12,8 @@ const router = new VueRouter({
 })
 const store = new Vuex.Store({
     modules:{
-        movies
+        movies,
+        turns
     }
 })
 Vue.mixin({

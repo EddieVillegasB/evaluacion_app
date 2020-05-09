@@ -10,6 +10,10 @@ class Movie {
         this.published_at = moment().format('YYYY-MM-DD')
     }
 
+    isComplete(){
+        return !!this.name
+    }
+
     static create(data = {}){
         return new Movie(data)
     }

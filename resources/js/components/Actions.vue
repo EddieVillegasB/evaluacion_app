@@ -1,7 +1,7 @@
 <template>
     <ul class="flex justify-around">
         <li>
-            <router-link href="#" :to="{path:this.item.path}">
+            <router-link :to="{path:this.item.path}">
                 <img src="../../icons/edit-pencil.svg" class="w-4 cursor-pointer"/>
             </router-link>
         </li>
@@ -14,18 +14,24 @@
             <img src="../../icons/lock-closed.svg" class="w-4 cursor-pointer"/>
         </li>
         <li>
-            <a href="#" @click="remove">
+            <button type="button" @click="remove">
                 <img src="../../icons/trash.svg" class="w-4 cursor-pointer"/>
-            </a>
+            </button>
         </li>
     </ul>
 </template>
 
 <script>
     export default {
+        name:'Actions',
         props:{
             item:{
-                required:true
+                required:true,
+                type: Object
+            },
+            action:{
+                required:true,
+                type: String
             }
         },
         data(){
@@ -34,9 +40,11 @@
             }
         },
         methods:{
-            async remove(){
+            async remove(e){
+                e.preventDefault()
                 const URL = `v1/${this.item.path}`
                 try {
+                    this.$store.dispatch(this.action, {id:this.item.id});
                     await axios.delete(URL)
                 } catch (error) {
                     console.log(error)

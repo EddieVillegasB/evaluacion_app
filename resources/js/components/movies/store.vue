@@ -56,6 +56,7 @@
             async save(){
                 const URL = '/v1/movies'
                 try {
+                    if(!this.movie.isComplete()) return
                     await axios.post(URL, this.movie)
                     this.$router.push({name:'movies.index'})
                 } catch (error) {
@@ -74,8 +75,8 @@
             async get(id){
                 const URL = `/v1/movies/${id}`
                 try {
-                    const {data : {movie}} = await axios.get(URL)
-                    return movie
+                    const {data} = await axios.get(URL)
+                    return data
                 } catch (error) {
                     console.log(error)
                 }
@@ -84,9 +85,15 @@
 
         async created(){
             const {params:{id}} = this.$route
-            if(id){
-                const movie = await this.get(id)
-                this.movie = Movie.create(movie)
+            try {
+                if(id){
+                    const {movie = {}} = await this.get(id)
+                    this.movie = Movie.create(movie)
+                }else {
+                    this.movie = Movie.create()
+                }
+            } catch (error) {
+                console.log(error)
             }
         }
 

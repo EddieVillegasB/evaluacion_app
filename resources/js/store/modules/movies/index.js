@@ -7,6 +7,10 @@ const store = {
     actions:{
         SET_MOVIES({commit}, payload){
             commit('SET_MOVIES', payload)
+        },
+        DELETE_MOVIE({commit, state}, payload){
+            const movies = state.movies.filter(movie => movie.id !== payload.id)
+            commit('SET_MOVIES', {movies})
         }
     },
     mutations:{
@@ -15,7 +19,7 @@ const store = {
         }
     },
     getters:{
-
+        movies : (state) => state.movies 
     }
 }
 

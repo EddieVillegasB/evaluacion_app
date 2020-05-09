@@ -6,7 +6,7 @@
       <td>{{movie.name}}</td>  
       <td>{{movie.published_at | format_date}}</td>  
       <td>{{movie.status | isActive}}</td>
-      <td><Actions :item="movie"/></td>
+      <td><Actions :item="movie" :action="'movies/DELETE_MOVIE'"/></td>
       </tr>
     </List>
   </section>
@@ -21,7 +21,6 @@
   export default {
       name:'movies',
       data: () => ({
-          movies:[],
           columns:['id', 'nombre', 'F. Publicacion', 'Estado','']
       }),
       filters:{
@@ -37,12 +36,16 @@
         async getMovies(){
           const URL = '/v1/movies'
           try {
-              const {data:{movies}} = await axios.get(URL)
-              this.movies = movies.map(Movie.create)
-              this.$store.dispatch('movies/SET_MOVIES', {movies:this.movies})
+            const {data:{movies}} = await axios.get(URL)
+            this.$store.dispatch('movies/SET_MOVIES', {movies:movies.map(Movie.create)})
           } catch (error) {
-              console.log(error)
+            console.log(error)
           }
+        }
+      },
+      computed:{
+        movies(){
+          return this.$store.getters['movies/movies']
         }
       },
       created(){

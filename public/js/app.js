@@ -1952,9 +1952,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Actions',
   props: {
     item: {
-      required: true
+      required: true,
+      type: Object
+    },
+    action: {
+      required: true,
+      type: String
     }
   },
   data: function data() {
@@ -1963,7 +1969,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    remove: function remove() {
+    remove: function remove(e) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -1972,26 +1978,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                e.preventDefault();
                 URL = "v1/".concat(_this.item.path);
-                _context.prev = 1;
-                _context.next = 4;
+                _context.prev = 2;
+
+                _this.$store.dispatch(_this.action, {
+                  id: _this.item.id
+                });
+
+                _context.next = 6;
                 return axios["delete"](URL);
 
-              case 4:
-                _context.next = 9;
+              case 6:
+                _context.next = 11;
                 break;
 
-              case 6:
-                _context.prev = 6;
-                _context.t0 = _context["catch"](1);
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
-              case 9:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 6]]);
+        }, _callee, null, [[2, 8]]);
       }))();
     }
   }
@@ -2125,30 +2137,25 @@ __webpack_require__.r(__webpack_exports__);
     return {
       required: true,
       routes: {
-        'movies.store': {
-          title: 'Peliculas',
-          link: 'movies.store',
-          action: 'Nueva pelicula'
-        },
-        'movies.show': {
-          title: 'Peliculas',
-          link: 'movies.show',
-          action: 'Nueva pelicula'
-        },
-        'movies.index': {
-          title: 'Peliculas',
-          link: 'movies.store',
-          action: 'Nueva pelicula'
-        },
-        'turns.store': {
+        'turns.show': {
           title: 'Turnos',
           link: 'turns.store',
           action: 'Nuevo turno'
         },
         'turns.index': {
           title: 'Turnos',
-          link: 'turns.store',
+          link: 'turns.show',
           action: 'Nuevo turno'
+        },
+        'movies.index': {
+          title: 'Peliculas',
+          link: 'movies.show',
+          action: 'Nueva pelicula'
+        },
+        'movies.show': {
+          title: 'Peliculas',
+          link: 'movies.show',
+          action: 'Nueva pelicula'
         }
       }
     };
@@ -2268,7 +2275,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'movies',
   data: function data() {
     return {
-      movies: [],
       columns: ['id', 'nombre', 'F. Publicacion', 'Estado', '']
     };
   },
@@ -2300,27 +2306,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _yield$axios$get = _context.sent;
                 movies = _yield$axios$get.data.movies;
-                _this.movies = movies.map(_models_movie__WEBPACK_IMPORTED_MODULE_5__["default"].create);
 
                 _this.$store.dispatch('movies/SET_MOVIES', {
-                  movies: _this.movies
+                  movies: movies.map(_models_movie__WEBPACK_IMPORTED_MODULE_5__["default"].create)
                 });
 
-                _context.next = 13;
+                _context.next = 12;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](1);
                 console.log(_context.t0);
 
-              case 13:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[1, 9]]);
       }))();
+    }
+  },
+  computed: {
+    movies: function movies() {
+      return this.$store.getters['movies/movies'];
     }
   },
   created: function created() {
@@ -2407,28 +2417,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 URL = '/v1/movies';
                 _context.prev = 1;
-                _context.next = 4;
-                return axios.post(URL, _this.movie);
+
+                if (_this.movie.isComplete()) {
+                  _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt("return");
 
               case 4:
+                _context.next = 6;
+                return axios.post(URL, _this.movie);
+
+              case 6:
                 _this.$router.push({
                   name: 'movies.index'
                 });
 
-                _context.next = 10;
+                _context.next = 12;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](1);
                 console.log(_context.t0);
 
-              case 10:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 7]]);
+        }, _callee, null, [[1, 9]]);
       }))();
     },
     update: function update() {
@@ -2468,7 +2487,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     get: function get(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var URL, _yield$axios$get, movie;
+        var URL, _yield$axios$get, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
@@ -2481,8 +2500,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 _yield$axios$get = _context3.sent;
-                movie = _yield$axios$get.data.movie;
-                return _context3.abrupt("return", movie);
+                data = _yield$axios$get.data;
+                return _context3.abrupt("return", data);
 
               case 9:
                 _context3.prev = 9;
@@ -2502,31 +2521,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      var id, movie;
+      var id, _yield$_this3$get, _yield$_this3$get$mov, movie;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               id = _this3.$route.params.id;
+              _context4.prev = 1;
 
               if (!id) {
-                _context4.next = 6;
+                _context4.next = 11;
                 break;
               }
 
-              _context4.next = 4;
+              _context4.next = 5;
               return _this3.get(id);
 
-            case 4:
-              movie = _context4.sent;
+            case 5:
+              _yield$_this3$get = _context4.sent;
+              _yield$_this3$get$mov = _yield$_this3$get.movie;
+              movie = _yield$_this3$get$mov === void 0 ? {} : _yield$_this3$get$mov;
               _this3.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create(movie);
+              _context4.next = 12;
+              break;
 
-            case 6:
+            case 11:
+              _this3.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create();
+
+            case 12:
+              _context4.next = 17;
+              break;
+
+            case 14:
+              _context4.prev = 14;
+              _context4.t0 = _context4["catch"](1);
+              console.log(_context4.t0);
+
+            case 17:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4);
+      }, _callee4, null, [[1, 14]]);
     }))();
   }
 });
@@ -2764,13 +2801,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'turns.index',
   data: function data() {
     return {
-      columns: ['id', 'turno', 'estado', ''],
-      turns: []
+      columns: ['id', 'turno', 'estado', '']
     };
   },
   components: {
     List: _List__WEBPACK_IMPORTED_MODULE_1__["default"],
     Actions: _Actions__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  computed: {
+    turns: function turns() {
+      return this.$store.getters['turns/turns'];
+    }
   },
   methods: {
     getTurns: function getTurns() {
@@ -2791,7 +2832,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _yield$axios$get = _context.sent;
                 turns = _yield$axios$get.data.turns;
-                _this.turns = turns.map(_models_Turn__WEBPACK_IMPORTED_MODULE_2__["default"].create);
+
+                _this.$store.dispatch('turns/SET_TURNS', {
+                  turns: turns.map(_models_Turn__WEBPACK_IMPORTED_MODULE_2__["default"].create)
+                });
+
                 _context.next = 12;
                 break;
 
@@ -60063,16 +60108,12 @@ var render = function() {
     _c(
       "li",
       [
-        _c(
-          "router-link",
-          { attrs: { href: "#", to: { path: this.item.path } } },
-          [
-            _c("img", {
-              staticClass: "w-4 cursor-pointer",
-              attrs: { src: __webpack_require__(/*! ../../icons/edit-pencil.svg */ "./resources/icons/edit-pencil.svg") }
-            })
-          ]
-        )
+        _c("router-link", { attrs: { to: { path: this.item.path } } }, [
+          _c("img", {
+            staticClass: "w-4 cursor-pointer",
+            attrs: { src: __webpack_require__(/*! ../../icons/edit-pencil.svg */ "./resources/icons/edit-pencil.svg") }
+          })
+        ])
       ],
       1
     ),
@@ -60082,7 +60123,7 @@ var render = function() {
     _vm._m(1),
     _vm._v(" "),
     _c("li", [
-      _c("a", { attrs: { href: "#" }, on: { click: _vm.remove } }, [
+      _c("button", { attrs: { type: "button" }, on: { click: _vm.remove } }, [
         _c("img", {
           staticClass: "w-4 cursor-pointer",
           attrs: { src: __webpack_require__(/*! ../../icons/trash.svg */ "./resources/icons/trash.svg") }
@@ -60244,9 +60285,11 @@ var render = function() {
       "button",
       { staticClass: "bg-yellow-400 p-1 border inline-block" },
       [
-        _c("router-link", { attrs: { to: { name: _vm.current.link } } }, [
-          _vm._v("\n            " + _vm._s(_vm.current.action) + "\n        ")
-        ])
+        _c(
+          "router-link",
+          { attrs: { to: { name: _vm.current.link, params: { id: 0 } } } },
+          [_vm._v("\n            " + _vm._s(_vm.current.action) + "\n        ")]
+        )
       ],
       1
     )
@@ -60359,7 +60402,15 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(_vm._f("isActive")(movie.status)))]),
             _vm._v(" "),
-            _c("td", [_c("Actions", { attrs: { item: movie } })], 1)
+            _c(
+              "td",
+              [
+                _c("Actions", {
+                  attrs: { item: movie, action: "movies/DELETE_MOVIE" }
+                })
+              ],
+              1
+            )
           ])
         }),
         0
@@ -60595,7 +60646,15 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(_vm._f("isActive")(turn.status)))]),
             _vm._v(" "),
-            _c("td", [_c("Actions", { attrs: { item: turn } })], 1)
+            _c(
+              "td",
+              [
+                _c("Actions", {
+                  attrs: { item: turn, action: "turns/DELETE_TURN" }
+                })
+              ],
+              1
+            )
           ])
         }),
         0
@@ -76873,6 +76932,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./route */ "./resources/js/route/index.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _store_modules_movies_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/modules/movies/index */ "./resources/js/store/modules/movies/index.js");
+/* harmony import */ var _store_modules_turns_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/modules/turns/index */ "./resources/js/store/modules/turns/index.js");
+
 
 
 
@@ -76886,7 +76947,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
 });
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    movies: _store_modules_movies_index__WEBPACK_IMPORTED_MODULE_4__["default"]
+    movies: _store_modules_movies_index__WEBPACK_IMPORTED_MODULE_4__["default"],
+    turns: _store_modules_turns_index__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
@@ -77733,7 +77795,12 @@ var Movie = /*#__PURE__*/function () {
     this.published_at = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD');
   }
 
-  _createClass(Movie, null, [{
+  _createClass(Movie, [{
+    key: "isComplete",
+    value: function isComplete() {
+      return !!this.name;
+    }
+  }], [{
     key: "create",
     value: function create() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -77781,14 +77848,6 @@ var routes = [{
   path: '/movies/:id',
   component: _components_movies_store__WEBPACK_IMPORTED_MODULE_1__["default"],
   name: 'movies.show'
-}, {
-  path: '/movies/create',
-  component: _components_movies_store__WEBPACK_IMPORTED_MODULE_1__["default"],
-  name: 'movies.store'
-}, {
-  path: '/turns/create',
-  component: _components_turns_create__WEBPACK_IMPORTED_MODULE_3__["default"],
-  name: 'turns.store'
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 
@@ -77813,6 +77872,16 @@ var store = {
     SET_MOVIES: function SET_MOVIES(_ref, payload) {
       var commit = _ref.commit;
       commit('SET_MOVIES', payload);
+    },
+    DELETE_MOVIE: function DELETE_MOVIE(_ref2, payload) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+      var movies = state.movies.filter(function (movie) {
+        return movie.id !== payload.id;
+      });
+      commit('SET_MOVIES', {
+        movies: movies
+      });
     }
   },
   mutations: {
@@ -77820,7 +77889,58 @@ var store = {
       state.movies = payload.movies;
     }
   },
-  getters: {}
+  getters: {
+    movies: function movies(state) {
+      return state.movies;
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/turns/index.js":
+/*!***************************************************!*\
+  !*** ./resources/js/store/modules/turns/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var store = {
+  namespaced: true,
+  state: {
+    turns: [],
+    turn: {}
+  },
+  actions: {
+    SET_TURNS: function SET_TURNS(_ref, payload) {
+      var commit = _ref.commit;
+      commit('SET_TURNS', payload);
+    },
+    DELETE_TURN: function DELETE_TURN(_ref2, payload) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+      var turns = state.turns.filter(function (_ref3) {
+        var id = _ref3.id;
+        return id !== payload.id;
+      });
+      commit('SET_TURNS', {
+        turns: turns
+      });
+    }
+  },
+  mutations: {
+    SET_TURNS: function SET_TURNS(state, payload) {
+      state.turns = payload.turns;
+    }
+  },
+  getters: {
+    turns: function turns(state) {
+      return state.turns;
+    }
+  }
 };
 /* harmony default export */ __webpack_exports__["default"] = (store);
 

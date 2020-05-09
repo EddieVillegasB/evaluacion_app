@@ -5,7 +5,7 @@
                 <td>{{turn.id}}</td>
                 <td>{{turn.time}}</td>
                 <td>{{turn.status | isActive}}</td>
-                <td><Actions :item="turn"/></td>
+                <td><Actions :item="turn" :action="'turns/DELETE_TURN'"/></td>
             </tr>
         </List>
     </section>
@@ -17,17 +17,22 @@
     import Actions from '../Actions'
     export default {
         name: 'turns.index',
-        data:()=> ({columns:['id','turno','estado',''], turns:[]}),
+        data:()=> ({columns:['id','turno','estado','']}),
         components:{
             List,
             Actions
+        },
+        computed:{
+            turns(){
+                return this.$store.getters['turns/turns']
+            }
         },
         methods:{
             async getTurns(){
                 const URL = '/v1/turns'
                 try {
                     const {data:{turns}} = await axios.get(URL)
-                    this.turns = turns.map(Turn.create)
+                    this.$store.dispatch('turns/SET_TURNS', {turns:turns.map(Turn.create)})
                 } catch (error) {
                     console.log(error)
                 }

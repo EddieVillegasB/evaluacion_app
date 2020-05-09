@@ -7,9 +7,7 @@ const routes = [
     { path: '/turns', component: turns, name:'turns.index'},
     { path: '/turns/:id', component: turn, name:'turns.show'},
     { path: '/movies', component: movies, name:'movies.index'},
-    { path: '/movies/:id', component: movie, name:'movies.show'},
-    { path: '/movies/create', component: movie, name:'movies.store'},
-    { path: '/turns/create', component: turn, name:'turns.store'}
+    { path: '/movies/:id', component: movie, name:'movies.show'}
 ]
 
 export default routes
