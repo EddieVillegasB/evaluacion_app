@@ -25,12 +25,12 @@
 
 <script>
 
-  import Movie from '../../models/movie'
+  import Movie from '../../models/movie/index'
   import Action from '../../components/Action'
 
   export default {
       
-    name:'movies.create',
+    //name:'movie',
 
     data : () =>({movie:{}}),
 
@@ -40,9 +40,8 @@
 
     methods:{
       async get(id){
-        const URL = `/v1/movies/${id}`
         try {
-            const {data} = await axios.get(URL)
+            const {data} = await axios.get(`/v1/movies/${id}`)
             return data
         } catch (error) {
             console.log(error)

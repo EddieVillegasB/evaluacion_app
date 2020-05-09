@@ -14,7 +14,7 @@ class TurnController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $turns = Turn::all();
+        $turns = Turn::orderBy('id','asc')->get();
         return response()->json(['turns' => $turns], 200);
     }
 

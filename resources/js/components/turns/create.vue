@@ -12,21 +12,24 @@
 
 <script>
 
-    import Turn from '../../models/Turn'
+    import Turn from '../../models/turn/index'
 
     import Action from '../../components/Action'
 
     export default {
 
-        name:'turns.store',
+        name:'turn',
+
+        components:{
+            Action
+        },
 
         data:() => ({turn:{}}),
 
         methods:{
             async get(id){
-                const URL = `/v1/turs/${id}`
                 try {
-                    const {data} = await axios.get(URL)
+                    const {data} = await axios.get(`/v1/turns/${id}`)
                     return data
                 } catch (error) {
                     console.log(error)

@@ -17,40 +17,41 @@
   import List from '../List'
   import moment from 'moment'
   import Actions from '../Actions'
-  import Movie from '../../models/movie'
+  import Movie from '../../models/movie/index'
+  
   export default {
-      name:'movies',
-      data: () => ({
-          columns:['id', 'nombre', 'F. Publicacion', 'Estado','']
-      }),
-      filters:{
-        format_date(value){
-          return moment(value).format('MM-DD-YYYY')
+
+    name:'movies',
+    
+    data: () => ({columns:['id', 'nombre', 'F. Publicacion', 'Estado','']}),
+    
+    filters:{
+      format_date : (value) => moment(value).format('MM-DD-YYYY')
+    },
+    
+    components:{List, Actions},
+    
+    methods:{
+      async getMovies(){
+        try {
+          const {data:{movies}} = await axios.get('/v1/movies')
+          this.$store.dispatch('movies/SET_MOVIES', {movies:movies.map(Movie.create)})
+        } catch (error) {
+          console.log(error)
         }
-      },
-      components:{
-        List,
-        Actions
-      },
-      methods:{
-        async getMovies(){
-          const URL = '/v1/movies'
-          try {
-            const {data:{movies}} = await axios.get(URL)
-            this.$store.dispatch('movies/SET_MOVIES', {movies:movies.map(Movie.create)})
-          } catch (error) {
-            console.log(error)
-          }
-        }
-      },
-      computed:{
-        movies(){
-          return this.$store.getters['movies/movies']
-        }
-      },
-      created(){
-        this.getMovies()
+      }
+    },
+    
+    computed:{
+      movies(){
+        return this.$store.getters['movies/movies']
+      }
+    },
+    
+    created(){
+      this.getMovies()
     }
+
   }
 </script>
 

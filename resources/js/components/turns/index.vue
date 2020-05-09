@@ -13,10 +13,10 @@
 
 <script>
     import List from '../List'
-    import Turn from '../../models/Turn'
     import Actions from '../Actions'
+    import Turn from '../../models/turn/index'
     export default {
-        name: 'turns.index',
+        name: 'turns',
         data:()=> ({columns:['id','turno','estado','']}),
         components:{
             List,

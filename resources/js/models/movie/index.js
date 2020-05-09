@@ -8,11 +8,11 @@ class Movie {
         this.path = 'movies'
         this.status = status
         this.fullPath = `${this.path}/${this.id}`
-        this.published_at = moment().format('YYYY-MM-DD')
+        this.published_at = published_at
     }
 
     isComplete(){
-        return !!this.name
+        return !!this.name && !!this.published_at
     }
 
     static create(data = {}){

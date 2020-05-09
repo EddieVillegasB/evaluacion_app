@@ -24,7 +24,7 @@
       async save(){
         try {
             if(!this.item.isComplete()) return
-            await axios.post(this.ite.path, this.item)
+            await axios.post(`/v1/${this.item.path}`, this.item)
             this.$router.push({name:this.item.path})
         } catch (error) {
             console.log(error)

@@ -1964,7 +1964,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 _context.next = 5;
-                return axios.post(_this.ite.path, _this.item);
+                return axios.post("/v1/".concat(_this.item.path), _this.item);
 
               case 5:
                 _this.$router.push({
@@ -2369,7 +2369,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Actions */ "./resources/js/components/Actions.vue");
-/* harmony import */ var _models_movie__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/movie */ "./resources/js/models/movie.js");
+/* harmony import */ var _models_movie_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/movie/index */ "./resources/js/models/movie/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2416,39 +2416,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var URL, _yield$axios$get, movies;
+        var _yield$axios$get, movies;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                URL = '/v1/movies';
-                _context.prev = 1;
-                _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(URL);
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/v1/movies');
 
-              case 4:
+              case 3:
                 _yield$axios$get = _context.sent;
                 movies = _yield$axios$get.data.movies;
 
                 _this.$store.dispatch('movies/SET_MOVIES', {
-                  movies: movies.map(_models_movie__WEBPACK_IMPORTED_MODULE_5__["default"].create)
+                  movies: movies.map(_models_movie_index__WEBPACK_IMPORTED_MODULE_5__["default"].create)
                 });
 
-                _context.next = 12;
+                _context.next = 11;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](1);
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 9]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   },
@@ -2475,7 +2474,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _models_movie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/movie */ "./resources/js/models/movie.js");
+/* harmony import */ var _models_movie_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/movie/index */ "./resources/js/models/movie/index.js");
 /* harmony import */ var _components_Action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Action */ "./resources/js/components/Action.vue");
 
 
@@ -2511,7 +2510,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'movies.create',
+  //name:'movie',
   data: function data() {
     return {
       movie: {}
@@ -2523,33 +2522,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     get: function get(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var URL, _yield$axios$get, data;
+        var _yield$axios$get, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                URL = "/v1/movies/".concat(id);
-                _context.prev = 1;
-                _context.next = 4;
-                return axios.get(URL);
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get("/v1/movies/".concat(id));
 
-              case 4:
+              case 3:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
                 return _context.abrupt("return", data);
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](1);
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 9]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   },
@@ -2578,12 +2576,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _yield$_this$get = _context2.sent;
               _yield$_this$get$movi = _yield$_this$get.movie;
               movie = _yield$_this$get$movi === void 0 ? {} : _yield$_this$get$movi;
-              _this.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create(movie);
+              _this.movie = _models_movie_index__WEBPACK_IMPORTED_MODULE_1__["default"].create(movie);
               _context2.next = 12;
               break;
 
             case 11:
-              _this.movie = _models_movie__WEBPACK_IMPORTED_MODULE_1__["default"].create();
+              _this.movie = _models_movie_index__WEBPACK_IMPORTED_MODULE_1__["default"].create();
 
             case 12:
               _context2.next = 17;
@@ -2617,7 +2615,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _models_Turn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/Turn */ "./resources/js/models/Turn.js");
+/* harmony import */ var _models_turn_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/turn/index */ "./resources/js/models/turn/index.js");
 /* harmony import */ var _components_Action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Action */ "./resources/js/components/Action.vue");
 
 
@@ -2640,7 +2638,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'turns.store',
+  name: 'turn',
+  components: {
+    Action: _components_Action__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   data: function data() {
     return {
       turn: {}
@@ -2649,33 +2650,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     get: function get(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var URL, _yield$axios$get, data;
+        var _yield$axios$get, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                URL = "/v1/turs/".concat(id);
-                _context.prev = 1;
-                _context.next = 4;
-                return axios.get(URL);
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get("/v1/turns/".concat(id));
 
-              case 4:
+              case 3:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
                 return _context.abrupt("return", data);
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](1);
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 9]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   },
@@ -2702,12 +2702,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 4:
               _yield$_this$get = _context2.sent;
               turn = _yield$_this$get.turn;
-              _this.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create(turn);
+              _this.turn = _models_turn_index__WEBPACK_IMPORTED_MODULE_1__["default"].create(turn);
               _context2.next = 10;
               break;
 
             case 9:
-              _this.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create();
+              _this.turn = _models_turn_index__WEBPACK_IMPORTED_MODULE_1__["default"].create();
 
             case 10:
             case "end":
@@ -2733,8 +2733,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../List */ "./resources/js/components/List.vue");
-/* harmony import */ var _models_Turn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/Turn */ "./resources/js/models/Turn.js");
-/* harmony import */ var _Actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Actions */ "./resources/js/components/Actions.vue");
+/* harmony import */ var _Actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Actions */ "./resources/js/components/Actions.vue");
+/* harmony import */ var _models_turn_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/turn/index */ "./resources/js/models/turn/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2758,7 +2758,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'turns.index',
+  name: 'turns',
   data: function data() {
     return {
       columns: ['id', 'turno', 'estado', '']
@@ -2766,7 +2766,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   components: {
     List: _List__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Actions: _Actions__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Actions: _Actions__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: {
     turns: function turns() {
@@ -2794,7 +2794,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 turns = _yield$axios$get.data.turns;
 
                 _this.$store.dispatch('turns/SET_TURNS', {
-                  turns: turns.map(_models_Turn__WEBPACK_IMPORTED_MODULE_2__["default"].create)
+                  turns: turns.map(_models_turn_index__WEBPACK_IMPORTED_MODULE_3__["default"].create)
                 });
 
                 _context.next = 12;
@@ -77759,10 +77759,73 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/models/Turn.js":
-/*!*************************************!*\
-  !*** ./resources/js/models/Turn.js ***!
-  \*************************************/
+/***/ "./resources/js/models/movie/index.js":
+/*!********************************************!*\
+  !*** ./resources/js/models/movie/index.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Movie = /*#__PURE__*/function () {
+  function Movie(_ref) {
+    var _ref$id = _ref.id,
+        id = _ref$id === void 0 ? '' : _ref$id,
+        _ref$name = _ref.name,
+        name = _ref$name === void 0 ? '' : _ref$name,
+        _ref$published_at = _ref.published_at,
+        published_at = _ref$published_at === void 0 ? '' : _ref$published_at,
+        _ref$image = _ref.image,
+        image = _ref$image === void 0 ? '' : _ref$image,
+        _ref$status = _ref.status,
+        status = _ref$status === void 0 ? false : _ref$status;
+
+    _classCallCheck(this, Movie);
+
+    this.id = id;
+    this.name = name;
+    this.image = image;
+    this.path = 'movies';
+    this.status = status;
+    this.fullPath = "".concat(this.path, "/").concat(this.id);
+    this.published_at = published_at;
+  }
+
+  _createClass(Movie, [{
+    key: "isComplete",
+    value: function isComplete() {
+      return !!this.name && !!this.published_at;
+    }
+  }], [{
+    key: "create",
+    value: function create() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      return new Movie(data);
+    }
+  }]);
+
+  return Movie;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Movie);
+
+/***/ }),
+
+/***/ "./resources/js/models/turn/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/models/turn/index.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77809,69 +77872,6 @@ var Turn = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (Turn);
-
-/***/ }),
-
-/***/ "./resources/js/models/movie.js":
-/*!**************************************!*\
-  !*** ./resources/js/models/movie.js ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var Movie = /*#__PURE__*/function () {
-  function Movie(_ref) {
-    var _ref$id = _ref.id,
-        id = _ref$id === void 0 ? '' : _ref$id,
-        _ref$name = _ref.name,
-        name = _ref$name === void 0 ? '' : _ref$name,
-        _ref$published_at = _ref.published_at,
-        published_at = _ref$published_at === void 0 ? '' : _ref$published_at,
-        _ref$image = _ref.image,
-        image = _ref$image === void 0 ? '' : _ref$image,
-        _ref$status = _ref.status,
-        status = _ref$status === void 0 ? false : _ref$status;
-
-    _classCallCheck(this, Movie);
-
-    this.id = id;
-    this.name = name;
-    this.image = image;
-    this.path = 'movies';
-    this.status = status;
-    this.fullPath = "".concat(this.path, "/").concat(this.id);
-    this.published_at = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD');
-  }
-
-  _createClass(Movie, [{
-    key: "isComplete",
-    value: function isComplete() {
-      return !!this.name;
-    }
-  }], [{
-    key: "create",
-    value: function create() {
-      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      return new Movie(data);
-    }
-  }]);
-
-  return Movie;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (Movie);
 
 /***/ }),
 

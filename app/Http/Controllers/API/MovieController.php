@@ -15,7 +15,7 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $movies = Movie::all();
+        $movies = Movie::orderBy('id','desc')->get();
         return response()->json(['movies' => $movies, 'message' => 'OK','error' => false], 200);
     }
 
