@@ -37,6 +37,7 @@
             async save(){
                 const URL = '/v1/turns'
                 try{
+                    if(!this.turn.isComplete()) return
                     await axios.post(URL, this.turn)
                     this.$router.push({name:'turns.index'})
                 } catch(e){
@@ -55,8 +56,8 @@
             async get(id){
                 const URL = `/v1/turns/${id}`
                 try {
-                    const {data : {turn}} = await axios.get(URL)
-                    return turn
+                    const {data} = await axios.get(URL)
+                    return data
                 } catch (error) {
                     console.log(error)
                 }
@@ -65,8 +66,10 @@
         async created(){
             const {params:{id}} = this.$route
             if(id){
-                const turn = await this.get(id)
+                const {turn} = await this.get(id)
                 this.turn = Turn.create(turn)
+            }else {
+                this.turn = Turn.create()
             }
         }
     }

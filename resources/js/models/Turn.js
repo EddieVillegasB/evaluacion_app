@@ -7,6 +7,10 @@ class Turn {
         this.path = `turns/${this.id}`
     }
 
+    isComplete(){
+        return !!this.time
+    }
+
     static create(data = {}){
         return new Turn(data)
     }

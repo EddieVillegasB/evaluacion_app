@@ -2635,28 +2635,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 URL = '/v1/turns';
                 _context.prev = 1;
-                _context.next = 4;
-                return axios.post(URL, _this.turn);
+
+                if (_this.turn.isComplete()) {
+                  _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt("return");
 
               case 4:
+                _context.next = 6;
+                return axios.post(URL, _this.turn);
+
+              case 6:
                 _this.$router.push({
                   name: 'turns.index'
                 });
 
-                _context.next = 10;
+                _context.next = 12;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](1);
                 console.log(_context.t0);
 
-              case 10:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 7]]);
+        }, _callee, null, [[1, 9]]);
       }))();
     },
     update: function update() {
@@ -2696,7 +2705,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     get: function get(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var URL, _yield$axios$get, turn;
+        var URL, _yield$axios$get, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
@@ -2709,8 +2718,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 _yield$axios$get = _context3.sent;
-                turn = _yield$axios$get.data.turn;
-                return _context3.abrupt("return", turn);
+                data = _yield$axios$get.data;
+                return _context3.abrupt("return", data);
 
               case 9:
                 _context3.prev = 9;
@@ -2730,7 +2739,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      var id, turn;
+      var id, _yield$_this3$get, turn;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
@@ -2738,7 +2748,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               id = _this3.$route.params.id;
 
               if (!id) {
-                _context4.next = 6;
+                _context4.next = 9;
                 break;
               }
 
@@ -2746,10 +2756,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this3.get(id);
 
             case 4:
-              turn = _context4.sent;
+              _yield$_this3$get = _context4.sent;
+              turn = _yield$_this3$get.turn;
               _this3.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create(turn);
+              _context4.next = 10;
+              break;
 
-            case 6:
+            case 9:
+              _this3.turn = _models_Turn__WEBPACK_IMPORTED_MODULE_1__["default"].create();
+
+            case 10:
             case "end":
               return _context4.stop();
           }
@@ -77738,7 +77754,12 @@ var Turn = /*#__PURE__*/function () {
     this.path = "turns/".concat(this.id);
   }
 
-  _createClass(Turn, null, [{
+  _createClass(Turn, [{
+    key: "isComplete",
+    value: function isComplete() {
+      return !!this.time;
+    }
+  }], [{
     key: "create",
     value: function create() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
