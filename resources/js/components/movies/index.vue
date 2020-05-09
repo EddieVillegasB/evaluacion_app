@@ -39,6 +39,7 @@
           try {
               const {data:{movies}} = await axios.get(URL)
               this.movies = movies.map(Movie.create)
+              this.$store.dispatch('movies/SET_MOVIES', {movies:this.movies})
           } catch (error) {
               console.log(error)
           }

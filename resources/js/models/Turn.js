@@ -1,10 +1,10 @@
 class Turn {
 
-    constructor({id = '', turn = '', status = false}){
+    constructor({id = '', time = '', status = false}){
         this.id = id
-        this.time = turn
+        this.time = time
         this.status = status
-        this.path = `movies/${this.id}`
+        this.path = `turns/${this.id}`
     }
 
     static create(data = {}){

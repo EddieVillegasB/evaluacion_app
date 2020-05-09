@@ -35,7 +35,7 @@
         },
         methods:{
             async remove(){
-                const URL = `v1/movies/${this.item.id}`
+                const URL = `v1/${this.item.path}`
                 try {
                     await axios.delete(URL)
                 } catch (error) {
