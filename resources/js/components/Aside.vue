@@ -1,13 +1,13 @@
 <template>
-    <nav class="bg-blue-900 w-1/6 h-screen">
+    <nav class="bg-teal-500 w-1/6 h-screen">
         <ul class="text-center">
-            <li class="border border-black p-2">
-                <router-link :to="{name:'movies'}">
+            <li class="border p-2">
+                <router-link :to="{name:'movies'}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                     {{'Peliculas'}}
                 </router-link>
             </li>
-            <li class="border border-black p-2">
-                <router-link :to="{name:'turns'}">
+            <li class="border p-2">
+                <router-link :to="{name:'turns'}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                     {{'Turnos'}}
                 </router-link>
             </li>

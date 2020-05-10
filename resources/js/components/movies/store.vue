@@ -1,29 +1,52 @@
 <template>
   
-    <form class="flex flex-wrap">
-
-      <div class="flex w-full mb-8">
-        <div class="w-2/12">
-          <label>{{'Nombres'}}</label>
+    <form class="w-full max-w-sm">
+      
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              {{'Nombres'}}
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input 
+              type="text"  
+              v-model="movie.name"
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+            />
+          </div>
         </div>
-        <div class="w-10/12">
-          <input class="w-full" v-model="movie.name"/>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              {{'F. publicacion'}}
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input 
+              type="date" 
+              v-model="movie.published_at"
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="w-full mb-8">
-        <label>{{'F. publicacion'}}</label>
-        <input class="w-3/4" type="date" v-model="movie.published_at"/>
-      </div>
-
-      <div class="w-full mb-8">
-        <label>{{'imagen'}}</label>
-        <a href="#" @click="load_image">
-          <img :src="movie.image" class="w-32"/>
-        </a>
-        <input type="file" class='w-3/4 hidden' @click="setImage" ref="imagen"/>
-      </div>
-
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              {{'imagen'}}
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <a href="#" @click="load_image">
+              <div class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                <img :src="image"  alt="click here"/>
+              </div>
+            </a>
+            <input type="file" class='w-3/4 hidden' @click="setImage" ref="imagen"/>
+          </div>
+        </div>
 
       <Action :item="movie"/>
 
@@ -40,7 +63,7 @@
       
     name:'movie',
 
-    data : () =>({movie:{}}),
+    data : () =>({movie:{},image:''}),
 
     components:{
       Action
@@ -52,7 +75,14 @@
       },
       setImage(e){
         const [image] = e.target.files
+        
         this.movie.image = image
+  
+        const reader = new FileReader();
+        
+        reader.readAsDataURL(image);
+        
+        reader.onloadend = () => this.image = reader.result
       },
       async get(id){
         try {
@@ -70,6 +100,7 @@
           if(id){
               const {movie = {}} = await this.get(id)
               this.movie = Movie.create(movie)
+              this.image = this.movie.image
           }else {
               this.movie = Movie.create()
           }

@@ -1,5 +1,5 @@
 <template>
-   <button @click="saveOrUpdate" type="button" class="bg-green-800 p-2">
+   <button @click="saveOrUpdate" type="button" class="bg-teal-500 inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-black mt-4 lg:mt-0">
         {{action | method}}
     </button>
 </template>

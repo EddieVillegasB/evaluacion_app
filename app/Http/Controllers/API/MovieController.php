@@ -32,10 +32,10 @@ class MovieController extends Controller
         if($request->hasFile('image')){
             
             if($request->file('image')->isValid()){
-                $image = $request->file('image');
-                $name =  $image->getClientOriginalName();
-                $path =  $image->storeAs('public/images', $name);
-                $data['image'] = "/storage/images/{$name}"; 
+                $image =  $request->file('image');
+                $name =   $image->getClientOriginalName();
+                $path =   $image->storeAs('public/images/movies', $name);
+                $data['image'] = "/storage/images/movies/{$name}"; 
             }
         }
 
@@ -63,7 +63,19 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Movie $movie){
+        
+        if($request->hasFile('image')){
+            
+            if($request->file('image')->isValid()){
+                $image =  $request->file('image');
+                $name =   $image->getClientOriginalName();
+                $path =   $image->storeAs('public/images/movies', $name);
+                $data['image'] = "/storage/images/movies/{$name}"; 
+            }
+        }
+        
         $movie->update($request->all());
+        
         return response()->json(['movie' => $movie, 'message' => 'OK', 'error' => false], 200);
     }
 

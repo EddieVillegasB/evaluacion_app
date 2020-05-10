@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
 
 Route::prefix('v1')->group(function () { 
     Route::apiResources([
@@ -11,5 +12,3 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::view('/{any}', 'welcome')->where('any', '.*');
-
-Auth::routes();

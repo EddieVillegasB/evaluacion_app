@@ -3,7 +3,7 @@
         <navbar/>
         <div class="flex">
             <nav2 @show="show"/>
-            <div class="bg-blue-500 w-full w-5/6 p-5">
+            <div class="bg-gray-200 w-full w-5/6 p-5">
                 <Head/>
                 <router-view></router-view>
             </div>

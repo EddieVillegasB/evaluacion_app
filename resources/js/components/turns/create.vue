@@ -1,11 +1,35 @@
 <template>
   
-  <form>
-    <label>{{'Turno'}}</label>
-    <input type="time" v-model="turn.time"/>
-    <label>{{'Activo'}}</label>
-    <input type="checkbox" v-model="turn.status"/>
+  <form class="w-full max-w-sm">
+    
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            <label class="block font-bold md:text-right mb-1 md:mb-0 pr-4" for="time">
+                {{'Turno'}}
+            </label>
+        </div>
+        <div class="md:w-2/3">
+            <input
+                id="time"
+                type="time" 
+                v-model="turn.time" 
+                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            />
+        </div>
+    </div>
+    
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            <span class="block font-bold md:text-right mb-1 md:mb-0 pr-4">{{'Activo?'}}</span>
+        </div>
+        <label class="md:w-2/3 block font-bold">
+            <input type="checkbox" v-model="turn.status" class="mr-2 leading-tight"/>
+        </label>
+        </div>
+    </div>
+    
     <Action :item="turn"/>
+  
   </form>
 
 </template>
