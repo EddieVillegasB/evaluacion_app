@@ -2,11 +2,11 @@
   <section class="border border-black">
     <List :columns="columns" v-if="movies.isEmpty">
       <tr v-for="(movie, index) in movies.data" :key="index">
-      <td>{{movie.id}}</td>  
-      <td>{{movie.name}}</td>  
-      <td>{{movie.published_at | format_date}}</td>  
-      <td>{{movie.status | isActive}}</td>
-      <td><Actions :item="movie" :action="'movies/DELETE_MOVIE'"/></td>
+        <td>{{movie.id}}</td>  
+        <td>{{movie.name}}</td>  
+        <td>{{movie.published_at | format_date}}</td>  
+        <td>{{movie.status | isActive}}</td>
+        <td><Actions :item="movie" :action="'movies/DELETE_MOVIE'"/></td>
       </tr>
     </List>
     <Empty :message="'No hay peliculas'" v-else/>
