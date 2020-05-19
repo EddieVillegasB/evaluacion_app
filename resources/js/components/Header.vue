@@ -6,11 +6,11 @@
         <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div>
                 <router-link 
-                    href="#" 
+                    href="#"
+                    :to="{name:current.link}"
                     class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-                    :to="{name:current.name}"
                 >
-                {{current.action}}
+                    {{current.action}}
                 </router-link>
             </div>
         </div>

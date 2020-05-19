@@ -22,7 +22,8 @@ const store = {
         }
     },
     getters:{
-        movies : (state) => state.movies
+        movies : (state) => state.movies,
+        findById : (state, getters) => id => getters.movies.data.find(movie => movie.id === id)
     }
 }
 

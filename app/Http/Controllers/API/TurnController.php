@@ -14,7 +14,7 @@ class TurnController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $turns = Turn::orderBy('id','asc')->get();
+        $turns = Turn::orderBy('time','asc')->get();
         return response()->json(['turns' => $turns], 200);
     }
 
@@ -47,9 +47,10 @@ class TurnController extends Controller
      * @param  \App\Models\Turn  $turn
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Turn $turn)
-    {
+    public function update(Request $request, Turn $turn) {
+        
         $turn->update($request->all());
+        
         return response()->json(['turn' => $turn]);
     }
 

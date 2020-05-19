@@ -39,7 +39,7 @@
             </label>
           </div>
           <div class="md:w-2/3">
-            <a href="#" @click="load_image">
+            <a href="!#" @click="load_image">
               <div class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                 <img :src="image"  alt="click here"/>
               </div>
@@ -70,7 +70,8 @@
     },
 
     methods:{
-      load_image(){
+      load_image(e){
+        e.preventDefault()
         this.$refs.imagen.click()
       },
       setImage(e){

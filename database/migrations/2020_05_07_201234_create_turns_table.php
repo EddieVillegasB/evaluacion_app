@@ -15,12 +15,10 @@ class CreateTurnsTable extends Migration
     {
         Schema::create('turns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('movie_id')->nullable();
             $table->boolean('status')->default(false);
             $table->time('time');
             $table->timestamps();
 
-            $table->foreign('movie_id')->references('id')->on('movies');
         });
     }
 

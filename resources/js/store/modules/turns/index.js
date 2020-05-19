@@ -22,7 +22,8 @@ const store = {
         }
     },
     getters:{
-        turns : (state) => state.turns 
+        turns : (state) => state.turns,
+        selected : (state, getters) => getters.turns.data.filter(({isSelected}) => !!isSelected)
     }
 }
 

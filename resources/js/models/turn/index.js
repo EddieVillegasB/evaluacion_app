@@ -1,10 +1,11 @@
 class Turn {
 
-    constructor({id = '', time = '', status = false}){
+    constructor({id = '', time = '', status = false, isSelected = false}){
         this.id = id
         this.time = time
         this.path = 'turns'
         this.status = status
+        this.isSelected = isSelected
         this.fullPath = `${this.path}/${this.id}`
     }
 

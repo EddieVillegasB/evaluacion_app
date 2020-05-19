@@ -3,12 +3,22 @@
         <ul class="text-center">
             <li class="border p-2">
                 <router-link :to="{name:'movies'}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                    {{'Peliculas'}}
+                    <span class="inline-block mx-1">
+                        <img src="../../icons/video-camera.svg" class="w-4 p-0 object-contain">
+                    </span> 
+                    <span class="hidden md:inline-block">
+                        {{'Peliculas'}}
+                    </span>
                 </router-link>
             </li>
             <li class="border p-2">
-                <router-link :to="{name:'turns'}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                    {{'Turnos'}}
+                <router-link :to="{name:'turns'}" class="block mt-4 p-0">
+                    <span class="inline-block mx-1">
+                        <img src="../../icons/ticket.svg" class="w-4 p-0 object-contain">
+                    </span>
+                    <span class="hidden md:inline-block">
+                        {{'Turnos'}}
+                    </span>
                 </router-link>
             </li>
         </ul>

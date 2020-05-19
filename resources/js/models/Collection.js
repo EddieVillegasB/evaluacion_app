@@ -9,6 +9,10 @@ class Collection {
         return _.orderBy(this.data,column)    
     }
 
+    selected(){
+        return this.data.filter(({isSelected}) => isSelected)
+    }
+
     static create(items, instance){
         return new Collection(items, instance)
     }

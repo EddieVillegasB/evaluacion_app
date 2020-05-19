@@ -25,7 +25,7 @@
         <label class="md:w-2/3 block font-bold">
             <input type="checkbox" v-model="turn.status" class="mr-2 leading-tight"/>
         </label>
-        </div>
+        
     </div>
     
     <Action :item="turn"/>

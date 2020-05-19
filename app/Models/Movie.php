@@ -13,6 +13,6 @@ class Movie extends Model {
     }
 
     public function turns(){
-        return $this->hasMany('App\Models\Turn');
+        return $this->belongsToMany('App\Models\Turn');
     }
 }

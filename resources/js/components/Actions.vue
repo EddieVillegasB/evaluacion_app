@@ -6,9 +6,9 @@
             </router-link>
         </li>
         <li>
-            <a href="#">
+            <router-link :to="{name:'turns', query:{movie: this.item.id}}">
                 <img src="../../icons/view-list.svg" class="w-4 cursor-pointer"/>
-            </a>
+            </router-link>
         </li>
         <li>
             <a href="#" @click="toggleBlock">
@@ -20,6 +20,9 @@
             <button type="button" @click="remove">
                 <img src="../../icons/trash.svg" class="w-4 cursor-pointer"/>
             </button>
+        </li>
+        <li>
+           <input type="checkbox" v-model="item.isSelected" @click="assing">
         </li>
     </ul>
 </template>
@@ -35,6 +38,10 @@
             action:{
                 required:true,
                 type: String
+            },
+            movie:{
+                required: false,
+                type: Object
             }
         },
         data(){
@@ -42,7 +49,21 @@
                 icons:[{}]
             }
         },
+        computed:{
+            turns(){
+                return this.$store.getters['turns/selected']
+            }
+        },
         methods:{
+            async assing(){
+                this.item.isSelected = !this.item.isSelected
+                const turns = this.turns.map(({id}) => id)
+                try {
+                    await axios.put(`/v1/${this.movie.fullPath}`, {turns})
+                } catch (error) {
+                    console.log(error)
+                }
+            },
             async remove(e){
                 const URL = `v1/${this.item.fullPath}`
                 try {

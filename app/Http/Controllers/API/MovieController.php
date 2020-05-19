@@ -15,7 +15,7 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $movies = Movie::orderBy('id','desc')->get();
+        $movies = Movie::with('turns:id')->orderBy('id','asc')->get();
         return response()->json(['movies' => $movies, 'message' => 'OK','error' => false], 200);
     }
 
@@ -72,6 +72,10 @@ class MovieController extends Controller
                 $path =   $image->storeAs('public/images/movies', $name);
                 $data['image'] = "/storage/images/movies/{$name}"; 
             }
+        }
+
+        if($request->has('turns')){
+            $movie->turns()->sync($request->turns);
         }
         
         $movie->update($request->all());
