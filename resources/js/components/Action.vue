@@ -24,20 +24,25 @@
       },
       async save(){
         if(!this.item.isComplete()) return
-        const formData = new FormData()
-        for(let property in this.item)
-          formData.append(property, this.item[property])
         try {
-            await axios.post(`/v1/${this.item.path}`, formData)
+            await axios.post(`/v1/${this.item.path}`, this.formData(this.item))
             this.$router.push({name:this.item.path})
         } catch (error) {
             console.log(error)
         }
       },
-      update(){
+      formData(item, method = 'POST'){
+        const formData = new FormData()
+        for(let property in item)
+          formData.append(property, this.item[property])
+        formData.append('_method', method)
+        return formData
+      },
+      async update(){
         const url = `/v1/${this.item.fullPath}`
+        const item = this.formData(this.item, 'PUT')
         try {
-          axios.put(url, {...this.item})
+          await axios.post(url, item)
         } catch (error) {
           console.log(error)
         }

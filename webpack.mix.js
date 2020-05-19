@@ -5,4 +5,4 @@ mix
 .postCss('resources/css/main.css', 'public/css', [
     require('tailwindcss'),
 ])
-.copyDirectory('resources/icos', 'public/icons');;
+.copyDirectory('resources/icons', 'public/icons');;

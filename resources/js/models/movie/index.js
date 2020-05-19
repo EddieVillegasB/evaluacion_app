@@ -8,7 +8,7 @@ class Movie {
         this.image = image
         this.path = 'movies'
         this.status = status
-        this.published_at = published_at
+        this.published_at = moment(published_at).format('YYYY-MM-DD')
         this.fullPath = `${this.path}/${this.id}`
     }
     

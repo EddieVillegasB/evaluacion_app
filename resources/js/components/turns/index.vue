@@ -31,17 +31,17 @@
         },
         methods:{
             getMovie(){
-                const movie = this.$route.query.movie
-                this.movie = this.$store.getters['movies/findById'](movie)
+                const {movie = null} = this.$route.query
+                this.movie = movie ? this.$store.getters['movies/findById'](movie) : false
             },
             async getTurns(){
                 const URL = '/v1/turns'
                 try {
                     const {data:{turns}} = await axios.get(URL)
-                    const data = turns.map(turn => {
+                    const data = this.movie ? turns.map(turn => {
                         turn.isSelected = this.movie.turns.map(({id}) => id).includes(turn.id)
                         return turn
-                    })
+                    }) : turns
                     this.$store.dispatch('turns/SET_TURNS', {turns:Collection.create(data, Turn)})
                 } catch (error) {
                     console.log(error)

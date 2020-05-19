@@ -63,6 +63,8 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Movie $movie){
+
+        $data = $request->all();
         
         if($request->hasFile('image')){
             
@@ -78,7 +80,7 @@ class MovieController extends Controller
             $movie->turns()->sync($request->turns);
         }
         
-        $movie->update($request->all());
+        $movie->update($data);
         
         return response()->json(['movie' => $movie, 'message' => 'OK', 'error' => false], 200);
     }

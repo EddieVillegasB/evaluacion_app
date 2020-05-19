@@ -21,7 +21,7 @@
                 <img src="../../icons/trash.svg" class="w-4 cursor-pointer"/>
             </button>
         </li>
-        <li>
+        <li v-show="this.movie">
            <input type="checkbox" v-model="item.isSelected" @click="assing">
         </li>
     </ul>
