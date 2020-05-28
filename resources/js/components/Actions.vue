@@ -1,27 +1,27 @@
 <template>
     <ul class="flex justify-around my-2">
         <li>
-            <router-link :to="{path:this.item.fullPath}">
+            <router-link :to="{path:this.item.fullPath}" title="edit">
                 <img src="../../icons/edit-pencil.svg" class="w-4 cursor-pointer"/>
             </router-link>
         </li>
-        <li>
-            <router-link :to="{name:'turns', query:{movie: this.item.id}}">
+        <li v-show="isAssing">
+            <router-link :to="{name:'turns', query:{movie: this.item.id}}" title="assing turn">
                 <img src="../../icons/view-list.svg" class="w-4 cursor-pointer"/>
             </router-link>
         </li>
         <li>
-            <a href="#" @click="toggleBlock">
+            <a href="#" @click="toggleBlock" :title="item.status ? 'block' : 'unblock'">
                 <img src="../../icons/lock-open.svg" class="w-4 cursor-pointer" v-if="item.status"/>
                 <img src="../../icons/lock-closed.svg" class="w-4 cursor-pointer" v-else/>
             </a>
         </li>
         <li>
-            <button type="button" @click="remove">
+            <button type="button" @click="remove" title="delete">
                 <img src="../../icons/trash.svg" class="w-4 cursor-pointer"/>
             </button>
         </li>
-        <li v-show="this.movie">
+        <li v-show="movieExist">
            <input type="checkbox" v-model="item.isSelected" @click="assing">
         </li>
     </ul>
@@ -42,6 +42,10 @@
             movie:{
                 required: false,
                 type: Object
+            },
+            isAssing:{
+                required: true,
+                type: Boolean
             }
         },
         data(){
@@ -52,6 +56,9 @@
         computed:{
             turns(){
                 return this.$store.getters['turns/selected']
+            },
+            movieExist(){
+                return this.movie ? this.movie.hasOwnProperty('id') : false
             }
         },
         methods:{

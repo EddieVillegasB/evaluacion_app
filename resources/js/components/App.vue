@@ -11,9 +11,9 @@
     </div>
 </template>
 <script>
-    import Head from './Header'
-    import nav2 from '../components/Aside'
-    import navbar from '../components/Navbar'
+    import Head from './AppHeader'
+    import nav2 from '../components/AppAside'
+    import navbar from '../components/AppNavbar'
     import movies from '../components/movies/index'
     export default {
         data(){

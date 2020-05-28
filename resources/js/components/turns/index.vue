@@ -6,7 +6,7 @@
                     <td>{{turn.id}}</td>
                     <td>{{turn.time}}</td>
                     <td>{{turn.status | isActive}}</td>
-                    <td><Actions :item="turn" :movie="movie" :action="'turns/DELETE_TURN'"/></td>
+                    <td><Actions :item="turn" :movie="movie" :action="'turns/DELETE_TURN'" :isAssing="false"/></td>
                 </tr>
             </List>
             <Empty :message="'No hay turnos'" v-else/>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import List from '../List'
+    import List from '../AppList'
     import Empty from '../Empty'
     import Actions from '../Actions'
     import Turn from '../../models/turn/index'
@@ -32,13 +32,13 @@
         methods:{
             getMovie(){
                 const {movie = null} = this.$route.query
-                this.movie = movie ? this.$store.getters['movies/findById'](movie) : false
+                this.movie = movie ? this.$store.getters['movies/findById'](movie) : {}
             },
             async getTurns(){
                 const URL = '/v1/turns'
                 try {
                     const {data:{turns}} = await axios.get(URL)
-                    const data = this.movie ? turns.map(turn => {
+                    const data = this.movie.id ? turns.map(turn => {
                         turn.isSelected = this.movie.turns.map(({id}) => id).includes(turn.id)
                         return turn
                     }) : turns

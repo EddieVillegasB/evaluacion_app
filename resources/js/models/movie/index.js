@@ -14,8 +14,7 @@ class Movie {
     
     isComplete(){
         const isComplete = !!this.name && !!this.published_at
-        if(!isComplete)
-            alert('existen algunos campos vacios')
+        if(!isComplete) alert('existen algunos campos vacios')
         return isComplete
     }
 

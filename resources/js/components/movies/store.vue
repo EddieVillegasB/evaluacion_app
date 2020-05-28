@@ -63,7 +63,7 @@
       
     name:'movie',
 
-    data : () =>({movie:{},image:''}),
+    data : () =>({movie:{},image:'', errors:{nombre:[], fecha:[],imagen:[]}}),
 
     components:{
       Action
@@ -87,8 +87,8 @@
       },
       async get(id){
         try {
-            const {data} = await axios.get(`/v1/movies/${id}`)
-            return data
+          const {data} = await axios.get(`/v1/movies/${id}`)
+          return data
         } catch (error) {
             console.log(error)
         }

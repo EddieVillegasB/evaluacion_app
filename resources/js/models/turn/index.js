@@ -10,7 +10,9 @@ class Turn {
     }
 
     isComplete(){
-        return !!this.time
+        const isComplete = !!this.time
+        if(!isComplete) alert('existen algunos campos vacios')
+        return isComplete
     }
 
     static create(data = {}){

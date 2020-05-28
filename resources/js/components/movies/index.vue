@@ -6,7 +6,7 @@
         <td>{{movie.name}}</td>  
         <td>{{movie.published_at | format_date}}</td>  
         <td>{{movie.status | isActive}}</td>
-        <td><Actions :item="movie" :action="'movies/DELETE_MOVIE'"/></td>
+        <td><Actions :item="movie" :action="'movies/DELETE_MOVIE'" :isAssing="true"/></td>
       </tr>
     </List>
     <Empty :message="'No hay peliculas'" v-else/>
@@ -15,7 +15,7 @@
 
 <script>
   import axios from 'axios'
-  import List from '../List'
+  import List from '../AppList'
   import Empty from '../Empty'
   import moment from 'moment'
   import Actions from '../Actions'
