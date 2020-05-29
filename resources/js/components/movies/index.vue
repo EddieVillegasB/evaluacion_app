@@ -1,8 +1,8 @@
 <template>
   <section class="border border-black">
-    <List :columns="columns" v-if="movies_isEmpty">
+    <List :columns="columns" v-if="movies_isEmpty" action='movies/ORDER_BY'>
       <tr v-for="(movie, index) in movies.data" :key="index">
-        <td>{{movie.id}}</td>  
+        <td>{{movie.id}}</td>
         <td>{{movie.name}}</td>  
         <td>{{movie.published_at | format_date}}</td>  
         <td>{{movie.status | isActive}}</td>
@@ -26,7 +26,7 @@
 
     name:'movies',
     
-    data: () => ({columns:['id', 'nombre', 'F. Publicacion', 'Estado','']}),
+    data: () => ({columns:['id', 'nombre', 'f. publicación', 'estado','']}),
     
     filters:{
       format_date : (value) => moment(value).format('MM-DD-YYYY')

@@ -11,6 +11,10 @@ const store = {
         DELETE_TURN({commit, state}, payload){
             const turns = state.turns.data.filter(({id}) => id !== payload.id)
             commit('SET_DATA_TURNS', turns)
+        },
+        ORDER_BY({commit, state}, payload){
+            const turns = _.orderBy(state.turns.data,payload.column,payload.order)
+            commit('SET_DATA_TURNS',turns)
         }
     },
     mutations:{

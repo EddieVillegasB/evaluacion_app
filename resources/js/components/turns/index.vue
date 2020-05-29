@@ -1,17 +1,15 @@
 <template>
-    <div>
-        <section class="border border-black mb-2">
-            <List :columns="columns" v-if="turns_isEmpty">
-                <tr v-for="(turn,index) in turns.data" :key="index">
-                    <td>{{turn.id}}</td>
-                    <td>{{turn.time}}</td>
-                    <td>{{turn.status | isActive}}</td>
-                    <td><Actions :item="turn" :movie="movie" :action="'turns/DELETE_TURN'" :isAssing="false"/></td>
-                </tr>
-            </List>
-            <Empty :message="'No hay turnos'" v-else/>
-        </section>
-    </div>
+    <section class="border border-black mb-2">
+        <List :columns="columns" v-if="turns_isEmpty" action='turns/ORDER_BY'>
+            <tr v-for="(turn,index) in turns.data" :key="index">
+                <td>{{turn.id}}</td>
+                <td>{{turn.time}}</td>
+                <td>{{turn.status | isActive}}</td>
+                <td><Actions :item="turn" :movie="movie" :action="'turns/DELETE_TURN'" :isAssing="false"/></td>
+            </tr>
+        </List>
+        <Empty :message="'No hay turnos'" v-else/>
+    </section>
 </template>
 
 <script>

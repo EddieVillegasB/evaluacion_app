@@ -2098,6 +2098,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Actions',
   props: {
@@ -2283,10 +2285,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {
-    navbar: _components_AppNavbar__WEBPACK_IMPORTED_MODULE_2__["default"],
     movies: _components_movies_index__WEBPACK_IMPORTED_MODULE_3__["default"],
-    nav2: _components_AppAside__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Head: _AppHeader__WEBPACK_IMPORTED_MODULE_0__["default"]
+    AppHead: _AppHeader__WEBPACK_IMPORTED_MODULE_0__["default"],
+    AppAside: _components_AppAside__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppNavbar: _components_AppNavbar__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     show: function show(route) {
@@ -2379,8 +2381,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'header',
   data: function data() {
@@ -2446,11 +2446,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      order: 'asc'
+    };
+  },
   props: {
     columns: {
       required: true,
       type: Array
+    },
+    action: {
+      required: true,
+      type: String
+    }
+  },
+  methods: {
+    orderby: function orderby(column) {
+      this.order = this.order === 'asc' ? 'desc' : 'asc';
+      var columns = {
+        'id': 'id',
+        'nombre': 'name',
+        'f. publicación': 'published_at',
+        'estado': 'status',
+        'turno': 'time'
+      };
+      this.$store.dispatch(this.action, {
+        column: columns[column],
+        order: this.order
+      });
     }
   }
 });
@@ -2581,7 +2610,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'movies',
   data: function data() {
     return {
-      columns: ['id', 'nombre', 'F. Publicacion', 'Estado', '']
+      columns: ['id', 'nombre', 'f. publicación', 'estado', '']
     };
   },
   filters: {
@@ -2637,6 +2666,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     movies: function movies() {
       return this.$store.getters['movies/movies'];
+    },
+    movies_isEmpty: function movies_isEmpty() {
+      return this.$store.getters['movies/isEmpty'];
     }
   },
   created: function created() {
@@ -3032,8 +3064,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 
@@ -3055,6 +3085,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     turns: function turns() {
       return this.$store.getters['turns/turns'];
+    },
+    turns_isEmpty: function turns_isEmpty() {
+      return this.$store.getters['turns/isEmpty'];
     }
   },
   methods: {
@@ -60394,149 +60427,149 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("ul", { staticClass: "flex justify-around my-2" }, [
-    _c(
-      "li",
-      [
-        _c(
-          "router-link",
-          { attrs: { to: { path: this.item.fullPath }, title: "edit" } },
-          [
-            _c("img", {
-              staticClass: "w-4 cursor-pointer",
-              attrs: { src: __webpack_require__(/*! ../../icons/edit-pencil.svg */ "./resources/icons/edit-pencil.svg") }
-            })
+  return _c(
+    "ul",
+    { staticClass: "flex justify-around my-2" },
+    [
+      !_vm.movieExist
+        ? [
+            _c(
+              "li",
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: { to: { path: this.item.fullPath }, title: "edit" }
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "w-4 cursor-pointer",
+                      attrs: { src: __webpack_require__(/*! ../../icons/edit-pencil.svg */ "./resources/icons/edit-pencil.svg") }
+                    })
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isAssing,
+                    expression: "isAssing"
+                  }
+                ]
+              },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: { name: "turns", query: { movie: this.item.id } },
+                      title: "assing turn"
+                    }
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "w-4 cursor-pointer",
+                      attrs: { src: __webpack_require__(/*! ../../icons/view-list.svg */ "./resources/icons/view-list.svg") }
+                    })
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href: "#",
+                    title: _vm.item.status ? "block" : "unblock"
+                  },
+                  on: { click: _vm.toggleBlock }
+                },
+                [
+                  _vm.item.status
+                    ? _c("img", {
+                        staticClass: "w-4 cursor-pointer",
+                        attrs: { src: __webpack_require__(/*! ../../icons/lock-open.svg */ "./resources/icons/lock-open.svg") }
+                      })
+                    : _c("img", {
+                        staticClass: "w-4 cursor-pointer",
+                        attrs: { src: __webpack_require__(/*! ../../icons/lock-closed.svg */ "./resources/icons/lock-closed.svg") }
+                      })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "button",
+                {
+                  attrs: { type: "button", title: "delete" },
+                  on: { click: _vm.remove }
+                },
+                [
+                  _c("img", {
+                    staticClass: "w-4 cursor-pointer",
+                    attrs: { src: __webpack_require__(/*! ../../icons/trash.svg */ "./resources/icons/trash.svg") }
+                  })
+                ]
+              )
+            ])
           ]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "li",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isAssing,
-            expression: "isAssing"
-          }
-        ]
-      },
-      [
-        _c(
-          "router-link",
-          {
-            attrs: {
-              to: { name: "turns", query: { movie: this.item.id } },
-              title: "assing turn"
-            }
-          },
-          [
-            _c("img", {
-              staticClass: "w-4 cursor-pointer",
-              attrs: { src: __webpack_require__(/*! ../../icons/view-list.svg */ "./resources/icons/view-list.svg") }
-            })
-          ]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("li", [
-      _c(
-        "a",
-        {
-          attrs: { href: "#", title: _vm.item.status ? "block" : "unblock" },
-          on: { click: _vm.toggleBlock }
-        },
-        [
-          _vm.item.status
-            ? _c("img", {
-                staticClass: "w-4 cursor-pointer",
-                attrs: { src: __webpack_require__(/*! ../../icons/lock-open.svg */ "./resources/icons/lock-open.svg") }
-              })
-            : _c("img", {
-                staticClass: "w-4 cursor-pointer",
-                attrs: { src: __webpack_require__(/*! ../../icons/lock-closed.svg */ "./resources/icons/lock-closed.svg") }
-              })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("li", [
-      _c(
-        "button",
-        {
-          attrs: { type: "button", title: "delete" },
-          on: { click: _vm.remove }
-        },
-        [
-          _c("img", {
-            staticClass: "w-4 cursor-pointer",
-            attrs: { src: __webpack_require__(/*! ../../icons/trash.svg */ "./resources/icons/trash.svg") }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "li",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.movieExist,
-            expression: "movieExist"
-          }
-        ]
-      },
-      [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.item.isSelected,
-              expression: "item.isSelected"
-            }
-          ],
-          attrs: { type: "checkbox" },
-          domProps: {
-            checked: Array.isArray(_vm.item.isSelected)
-              ? _vm._i(_vm.item.isSelected, null) > -1
-              : _vm.item.isSelected
-          },
-          on: {
-            click: _vm.assing,
-            change: function($event) {
-              var $$a = _vm.item.isSelected,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && _vm.$set(_vm.item, "isSelected", $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    _vm.$set(
-                      _vm.item,
-                      "isSelected",
-                      $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                    )
+        : _c("li", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.item.isSelected,
+                  expression: "item.isSelected"
                 }
-              } else {
-                _vm.$set(_vm.item, "isSelected", $$c)
+              ],
+              attrs: { type: "checkbox" },
+              domProps: {
+                checked: Array.isArray(_vm.item.isSelected)
+                  ? _vm._i(_vm.item.isSelected, null) > -1
+                  : _vm.item.isSelected
+              },
+              on: {
+                click: _vm.assing,
+                change: function($event) {
+                  var $$a = _vm.item.isSelected,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.item, "isSelected", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.item,
+                          "isSelected",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.item, "isSelected", $$c)
+                  }
+                }
               }
-            }
-          }
-        })
-      ]
-    )
-  ])
+            })
+          ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60564,18 +60597,18 @@ var render = function() {
     "div",
     { staticClass: "bg-gray-200 h-full" },
     [
-      _c("navbar"),
+      _c("AppNavbar"),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "flex" },
         [
-          _c("nav2", { on: { show: _vm.show } }),
+          _c("AppAside", { on: { show: _vm.show } }),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "bg-gray-200 w-full w-5/6 p-5" },
-            [_c("Head"), _vm._v(" "), _c("router-view")],
+            [_c("AppHead"), _vm._v(" "), _c("router-view")],
             1
           )
         ],
@@ -60695,10 +60728,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "header",
-    {
-      staticClass:
-        "flex items-center justify-between flex-wrap bg-teal-500 p-6 mb-8"
-    },
+    { staticClass: "flex justify-between bg-teal-500 p-6 mb-8" },
     [
       _c(
         "div",
@@ -60718,27 +60748,20 @@ var render = function() {
         },
         [
           _c(
-            "div",
+            "router-link",
+            {
+              staticClass:
+                "inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0",
+              attrs: { href: "#", to: { name: _vm.current.link } }
+            },
             [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0",
-                  attrs: { href: "#", to: { name: _vm.current.link } }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.current.action) +
-                      "\n            "
-                  )
-                ]
+              _vm._v(
+                "\n            " + _vm._s(_vm.current.action) + "\n        "
               )
-            ],
-            1
+            ]
           )
-        ]
+        ],
+        1
       )
     ]
   )
@@ -60767,12 +60790,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", [
     _c("table", { staticClass: "text-center w-full" }, [
-      _c("thead", { staticClass: "bg-red-600" }, [
+      _c("thead", { staticClass: "bg-teal-500" }, [
         _c(
           "tr",
           _vm._l(_vm.columns, function(column, index) {
             return _c("th", { key: index }, [
-              _vm._v("\n          " + _vm._s(column) + "\n        ")
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.orderby(column)
+                    }
+                  }
+                },
+                [
+                  _c("span", { staticClass: "uppercase font-black" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(column) +
+                        " " +
+                        _vm._s(
+                          column ? (_vm.order === "asc" ? "∨" : "∧") : ""
+                        ) +
+                        "\n            "
+                    )
+                  ])
+                ]
+              )
             ])
           }),
           0
@@ -60948,10 +60993,10 @@ var render = function() {
     "section",
     { staticClass: "border border-black" },
     [
-      _vm.movies.isEmpty
+      _vm.movies_isEmpty
         ? _c(
             "List",
-            { attrs: { columns: _vm.columns } },
+            { attrs: { columns: _vm.columns, action: "movies/ORDER_BY" } },
             _vm._l(_vm.movies.data, function(movie, index) {
               return _c("tr", { key: index }, [
                 _c("td", [_vm._v(_vm._s(movie.id))]),
@@ -61020,7 +61065,7 @@ var render = function() {
               staticClass:
                 "block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             },
-            [_vm._v("\n            " + _vm._s("Nombres") + "\n          ")]
+            [_vm._v("\n            " + _vm._s("Nombre") + "\n          ")]
           )
         ]),
         _vm._v(" "),
@@ -61274,46 +61319,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "section",
-      { staticClass: "border border-black mb-2" },
-      [
-        _vm.turns.isEmpty
-          ? _c(
-              "List",
-              { attrs: { columns: _vm.columns } },
-              _vm._l(_vm.turns.data, function(turn, index) {
-                return _c("tr", { key: index }, [
-                  _c("td", [_vm._v(_vm._s(turn.id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(turn.time))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm._f("isActive")(turn.status)))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c("Actions", {
-                        attrs: {
-                          item: turn,
-                          movie: _vm.movie,
-                          action: "turns/DELETE_TURN",
-                          isAssing: false
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              }),
-              0
-            )
-          : _c("Empty", { attrs: { message: "No hay turnos" } })
-      ],
-      1
-    )
-  ])
+  return _c(
+    "section",
+    { staticClass: "border border-black mb-2" },
+    [
+      _vm.turns_isEmpty
+        ? _c(
+            "List",
+            { attrs: { columns: _vm.columns, action: "turns/ORDER_BY" } },
+            _vm._l(_vm.turns.data, function(turn, index) {
+              return _c("tr", { key: index }, [
+                _c("td", [_vm._v(_vm._s(turn.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(turn.time))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm._f("isActive")(turn.status)))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  [
+                    _c("Actions", {
+                      attrs: {
+                        item: turn,
+                        movie: _vm.movie,
+                        action: "turns/DELETE_TURN",
+                        isAssing: false
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        : _c("Empty", { attrs: { message: "No hay turnos" } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -78545,19 +78588,17 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Collection = /*#__PURE__*/function () {
-  function Collection(items, instance) {
+  function Collection() {
+    var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var instance = arguments.length > 1 ? arguments[1] : undefined;
+
     _classCallCheck(this, Collection);
 
-    this.data = items.map(instance.create);
+    this.data = !!items.length ? items.map(instance.create) : [];
     this.isEmpty = !!this.data.length;
   }
 
   _createClass(Collection, [{
-    key: "orderBy",
-    value: function orderBy(column) {
-      return _.orderBy(this.data, column);
-    }
-  }, {
     key: "selected",
     value: function selected() {
       return this.data.filter(function (_ref) {
@@ -78762,6 +78803,9 @@ var routes = [{
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
 var store = {
   namespaced: true,
   state: {
@@ -78780,6 +78824,14 @@ var store = {
         return movie.id !== payload.id;
       });
       commit('SET_DATA_MOVIES', movies);
+    },
+    ORDER_BY: function ORDER_BY(_ref3, payload) {
+      var commit = _ref3.commit,
+          state = _ref3.state;
+
+      var movies = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.orderBy(state.movies.data, payload.column, payload.order);
+
+      commit('SET_DATA_MOVIES', movies);
     }
   },
   mutations: {
@@ -78793,6 +78845,9 @@ var store = {
   getters: {
     movies: function movies(state) {
       return state.movies;
+    },
+    isEmpty: function isEmpty(state, getter) {
+      return !!getter.movies.data.length;
     },
     findById: function findById(state, getters) {
       return function (id) {
@@ -78835,6 +78890,14 @@ var store = {
         return id !== payload.id;
       });
       commit('SET_DATA_TURNS', turns);
+    },
+    ORDER_BY: function ORDER_BY(_ref4, payload) {
+      var commit = _ref4.commit,
+          state = _ref4.state;
+
+      var turns = _.orderBy(state.turns.data, payload.column, payload.order);
+
+      commit('SET_DATA_TURNS', turns);
     }
   },
   mutations: {
@@ -78849,9 +78912,12 @@ var store = {
     turns: function turns(state) {
       return state.turns;
     },
+    isEmpty: function isEmpty(state, getter) {
+      return !!getter.turns.data.length;
+    },
     selected: function selected(state, getters) {
-      return getters.turns.data.filter(function (_ref4) {
-        var isSelected = _ref4.isSelected;
+      return getters.turns.data.filter(function (_ref5) {
+        var isSelected = _ref5.isSelected;
         return !!isSelected;
       });
     }

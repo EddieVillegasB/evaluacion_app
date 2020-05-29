@@ -4,10 +4,6 @@ class Collection {
         this.data = !!items.length ? items.map(instance.create) : []
         this.isEmpty = !!this.data.length
     }
-    
-    orderBy(column){
-        return _.orderBy(this.data,column)    
-    }
 
     selected(){
         return this.data.filter(({isSelected}) => isSelected)

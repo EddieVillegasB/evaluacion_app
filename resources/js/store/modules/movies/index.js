@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const store = {
     namespaced: true,
     state:{
@@ -11,6 +13,10 @@ const store = {
         DELETE_MOVIE({commit, state}, payload){
             const movies = state.movies.data.filter(movie => movie.id !== payload.id)
             commit('SET_DATA_MOVIES', movies)
+        },
+        ORDER_BY({commit, state}, payload){
+            const movies = _.orderBy(state.movies.data,payload.column,payload.order)
+            commit('SET_DATA_MOVIES',movies)
         }
     },
     mutations:{

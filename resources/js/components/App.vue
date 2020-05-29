@@ -1,19 +1,19 @@
 <template>
     <div class="bg-gray-200 h-full">
-        <navbar/>
+        <AppNavbar/>
         <div class="flex">
-            <nav2 @show="show"/>
+            <AppAside @show="show"/>
             <div class="bg-gray-200 w-full w-5/6 p-5">
-                <Head/>
-                <router-view></router-view>
+                <AppHead/>
+                <router-view/>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import Head from './AppHeader'
-    import nav2 from '../components/AppAside'
-    import navbar from '../components/AppNavbar'
+    import AppHead from './AppHeader'
+    import AppAside from '../components/AppAside'
+    import AppNavbar from '../components/AppNavbar'
     import movies from '../components/movies/index'
     export default {
         data(){
@@ -26,10 +26,10 @@
             }
         },
         components:{
-            navbar,
             movies,
-            nav2,
-            Head
+            AppHead,
+            AppAside,
+            AppNavbar,
         },
         methods:{
             show(route){
