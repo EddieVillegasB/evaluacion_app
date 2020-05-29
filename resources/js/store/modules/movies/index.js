@@ -23,7 +23,8 @@ const store = {
     },
     getters:{
         movies : (state) => state.movies,
-        findById : (state, getters) => id => getters.movies.data.find(movie => movie.id === id)
+        isEmpty : (state, getter) => !!getter.movies.data.length,
+        findById : (state, getters) => id => getters.movies.data.find(movie => movie.id === id),
     }
 }
 

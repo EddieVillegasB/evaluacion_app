@@ -1,6 +1,6 @@
 <template>
   <section class="border border-black">
-    <List :columns="columns" v-if="movies.isEmpty">
+    <List :columns="columns" v-if="movies_isEmpty">
       <tr v-for="(movie, index) in movies.data" :key="index">
         <td>{{movie.id}}</td>  
         <td>{{movie.name}}</td>  
@@ -48,6 +48,9 @@
     computed:{
       movies(){
         return this.$store.getters['movies/movies']
+      },
+      movies_isEmpty(){
+        return this.$store.getters['movies/isEmpty']
       }
     },
     

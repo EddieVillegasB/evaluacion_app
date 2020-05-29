@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="border border-black mb-2">
-            <List :columns="columns" v-if="turns.isEmpty">
+            <List :columns="columns" v-if="turns_isEmpty">
                 <tr v-for="(turn,index) in turns.data" :key="index">
                     <td>{{turn.id}}</td>
                     <td>{{turn.time}}</td>
@@ -27,6 +27,9 @@
         computed:{
             turns(){
                 return this.$store.getters['turns/turns']
+            },
+            turns_isEmpty(){
+                return this.$store.getters['turns/isEmpty']
             }
         },
         methods:{

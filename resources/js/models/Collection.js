@@ -1,7 +1,7 @@
 class Collection {
 
-    constructor(items, instance){
-        this.data = items.map(instance.create)
+    constructor(items = [], instance){
+        this.data = !!items.length ? items.map(instance.create) : []
         this.isEmpty = !!this.data.length
     }
     

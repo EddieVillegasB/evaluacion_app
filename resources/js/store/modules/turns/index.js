@@ -23,6 +23,7 @@ const store = {
     },
     getters:{
         turns : (state) => state.turns,
+        isEmpty : (state, getter) => !!getter.turns.data.length,
         selected : (state, getters) => getters.turns.data.filter(({isSelected}) => !!isSelected)
     }
 }

@@ -1,27 +1,29 @@
 <template>
     <ul class="flex justify-around my-2">
-        <li>
-            <router-link :to="{path:this.item.fullPath}" title="edit">
-                <img src="../../icons/edit-pencil.svg" class="w-4 cursor-pointer"/>
-            </router-link>
-        </li>
-        <li v-show="isAssing">
-            <router-link :to="{name:'turns', query:{movie: this.item.id}}" title="assing turn">
-                <img src="../../icons/view-list.svg" class="w-4 cursor-pointer"/>
-            </router-link>
-        </li>
-        <li>
-            <a href="#" @click="toggleBlock" :title="item.status ? 'block' : 'unblock'">
-                <img src="../../icons/lock-open.svg" class="w-4 cursor-pointer" v-if="item.status"/>
-                <img src="../../icons/lock-closed.svg" class="w-4 cursor-pointer" v-else/>
-            </a>
-        </li>
-        <li>
-            <button type="button" @click="remove" title="delete">
-                <img src="../../icons/trash.svg" class="w-4 cursor-pointer"/>
-            </button>
-        </li>
-        <li v-show="movieExist">
+        <template v-if="!movieExist">
+            <li>
+                <router-link :to="{path:this.item.fullPath}" title="edit">
+                    <img src="../../icons/edit-pencil.svg" class="w-4 cursor-pointer"/>
+                </router-link>
+            </li>
+            <li v-show="isAssing">
+                <router-link :to="{name:'turns', query:{movie: this.item.id}}" title="assing turn">
+                    <img src="../../icons/view-list.svg" class="w-4 cursor-pointer"/>
+                </router-link>
+            </li>
+            <li>
+                <a href="#" @click="toggleBlock" :title="item.status ? 'block' : 'unblock'">
+                    <img src="../../icons/lock-open.svg" class="w-4 cursor-pointer" v-if="item.status"/>
+                    <img src="../../icons/lock-closed.svg" class="w-4 cursor-pointer" v-else/>
+                </a>
+            </li>
+            <li>
+                <button type="button" @click="remove" title="delete">
+                    <img src="../../icons/trash.svg" class="w-4 cursor-pointer"/>
+                </button>
+            </li>
+        </template>
+        <li v-else>
            <input type="checkbox" v-model="item.isSelected" @click="assing">
         </li>
     </ul>
